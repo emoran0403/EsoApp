@@ -1,4 +1,6 @@
-export const WEAPON_TRAITS = [
+import * as Types from '../TYPES';
+
+export const WEAPON_TRAITS: Types.WEAPON_TRAITS[] = [
   'Powered',
   'Charged',
   'Precise',
@@ -10,7 +12,7 @@ export const WEAPON_TRAITS = [
   'Nirnhoned',
 ];
 
-export const ARMOR_TRAITS = [
+export const ARMOR_TRAITS: Types.ARMOR_TRAITS[] = [
   'Sturdy',
   'Impenetrable',
   'Reinforced',
@@ -22,7 +24,7 @@ export const ARMOR_TRAITS = [
   'Nirnhoned',
 ];
 
-export const JEWELRY_TRAITS = [
+export const JEWELRY_TRAITS: Types.JEWELRY_TRAITS[] = [
   'Healthy',
   'Arcane',
   'Robust',
@@ -34,7 +36,7 @@ export const JEWELRY_TRAITS = [
   'Swift',
 ];
 
-export const All_TRAITS = {
+export const All_TRAITS: Types.ALL_TRAITS = {
   WEAPONS: WEAPON_TRAITS,
   ARMOR: ARMOR_TRAITS,
   JEWELRY: JEWELRY_TRAITS,

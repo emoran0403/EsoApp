@@ -1,3 +1,78 @@
+import { WEAPON_TRAIT_ITEMS } from 'constants/trait_items';
+
+export interface STYLE {
+  name: string;
+  material: string;
+  motif: number;
+}
+
+export interface ALL_TRAITS {
+  WEAPONS: WEAPON_TRAITS[];
+  ARMOR: ARMOR_TRAITS[];
+  JEWELRY: JEWELRY_TRAITS[];
+}
+export type WEAPON_TRAITS =
+  | 'Powered'
+  | 'Charged'
+  | 'Precise'
+  | 'Infused'
+  | 'Defending'
+  | 'Training'
+  | 'Sharpened'
+  | 'Decisive'
+  | 'Nirnhoned';
+export type ARMOR_TRAITS =
+  | 'Sturdy'
+  | 'Impenetrable'
+  | 'Reinforced'
+  | 'Well-fitted'
+  | 'Training'
+  | 'Infused'
+  | 'Invigorating'
+  | 'Divines'
+  | 'Nirnhoned';
+export type JEWELRY_TRAITS =
+  | 'Healthy'
+  | 'Arcane'
+  | 'Robust'
+  | 'Bloodthirsty'
+  | 'Harmony'
+  | 'Infused'
+  | 'Triune'
+  | 'Protective'
+  | 'Swift';
+
+export type WEAPON_TRAIT_ITEMS =
+  | 'Chysolite'
+  | 'Amethyst'
+  | 'Ruby'
+  | 'Jade'
+  | 'Turquoise'
+  | 'Carnelian'
+  | 'Fire'
+  | 'Citrine'
+  | 'Potent Nirncrux';
+export type ARMOR_TRAIT_ITEMS =
+  | 'Quartz'
+  | 'Diamond'
+  | 'Sardonyx'
+  | 'Almandine'
+  | 'Emerald'
+  | 'Bloodstone'
+  | 'Garnet'
+  | 'Sapphire'
+  | 'Fortified Nirncrux';
+export type JEWELRY_TRAIT_ITEMS =
+  | 'Antimony'
+  | 'Cobalt'
+  | 'Zinc'
+  | 'Slaughterstone'
+  | 'Dibellium'
+  | 'Aurbic Amber'
+  | 'Dawn-Prism'
+  | 'Titanium'
+  | 'Gilding Wax';
+
 export type ARMOR_SETS =
   | `Ashen Grip`
   | `Death's Wind`

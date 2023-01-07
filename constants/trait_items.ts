@@ -1,3 +1,5 @@
+import * as Types from '../TYPES';
+
 export const WEAPON_TRAIT_ITEMS = {
   Powered: 'Chysolite',
   Charged: 'Amethyst',
