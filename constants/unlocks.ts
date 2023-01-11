@@ -20,6 +20,81 @@ export const UNLOCKS: unlocks = {
   SWORDS: ['Sword', 'Greatsword'],
 };
 
+export type all_items =
+  | 'Battle Axe'
+  | 'Axe'
+  | 'Belt'
+  | 'Sash'
+  | 'Girdle'
+  | 'Sabatons'
+  | 'Shoes'
+  | 'Boots'
+  | 'Bow'
+  | 'Robe'
+  | 'Shirt'
+  | 'Jack'
+  | 'Curaiss'
+  | 'Dagger'
+  | 'Gauntlets'
+  | 'Gloves'
+  | 'Bracers'
+  | 'Helm'
+  | 'Hat'
+  | 'Helmet'
+  | 'Greaves'
+  | 'Breeches'
+  | 'Guards'
+  | 'Maul'
+  | 'Mace'
+  | 'Shield'
+  | 'Arm Cops'
+  | 'Pauldron'
+  | 'Epaulets'
+  | 'Inferno Staff'
+  | 'Ice Staff'
+  | 'Lightning Staff'
+  | 'Restoration Staff'
+  | 'Sword'
+  | 'Greatsword';
+
+export const ALL_ITEMS = [
+  'Battle Axe',
+  'Axe',
+  'Belt',
+  'Sash',
+  'Girdle',
+  'Sabatons',
+  'Shoes',
+  'Boots',
+  'Bow',
+  'Robe',
+  'Shirt',
+  'Jack',
+  'Curaiss',
+  'Dagger',
+  'Gauntlets',
+  'Gloves',
+  'Bracers',
+  'Helm',
+  'Hat',
+  'Helmet',
+  'Greaves',
+  'Breeches',
+  'Guards',
+  'Maul',
+  'Mace',
+  'Shield',
+  'Arm Cops',
+  'Pauldron',
+  'Epaulets',
+  'Inferno Staff',
+  'Ice Staff',
+  'Lightning Staff',
+  'Restoration Staff',
+  'Sword',
+  'Greatsword',
+];
+
 export type axes = 'Battle Axe' | 'Axe';
 export type belts = 'Belt' | 'Sash' | 'Girdle';
 export type boots = 'Sabatons' | 'Shoes' | 'Boots';
