@@ -151,6 +151,7 @@ export const ALL_SETS: armor_sets[] = [
   `Old Growth Brewer`,
 ];
 
+// looks weird, but this is the way to add string properties to an exported object
 export const TRAITS_NEEDED: any = {};
 
 TRAITS_NEEDED[`Ashen Grip`] = 2;
