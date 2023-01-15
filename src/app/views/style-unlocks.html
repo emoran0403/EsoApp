@@ -1,0 +1,30 @@
+<div>
+  <div>
+    <p>
+      Use the autocomplete box to search for a style, then click on that style
+      from the list. Click on each item that you know for the chosen style. Use
+      the toggle all button if you know all items for the style. *HINT* If you
+      are missing just 1 item, click the toggle all button, then click the item
+      that you don't have unlocked.
+    </p>
+  </div>
+  <!-- Side pane -->
+  <div>
+    <div>
+      <div>Autocomplete here, filtering styles</div>
+      <div>
+        <button *ngfor="let style of styles">{{style}}</button>
+      </div>
+    </div>
+  </div>
+  <!-- Item buttons -->
+  <div>
+    <div>
+      <button>Toggle All</button>
+      <button>Submit</button>
+    </div>
+    <div>
+      <button *ngfor="let inlock of inlocks"></button>
+    </div>
+  </div>
+</div>
