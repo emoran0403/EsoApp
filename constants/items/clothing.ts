@@ -42,7 +42,7 @@ export interface clothing_items {
   LEATHER_APPAREL: leather_apparel[];
 }
 
-export const CLOTHING: clothing_items = {
+export const CLOTHING_ITEMS: clothing_items = {
   CLOTH_APPAREL: CLOTH_APPAREL,
   LEATHER_APPAREL: LEATHER_APPAREL,
 };

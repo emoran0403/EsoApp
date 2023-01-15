@@ -1,8 +1,3 @@
-export interface all_traits {
-  WEAPONS: weapon_traits[];
-  ARMOR: armor_traits[];
-  JEWELRY: jewelry_traits[];
-}
 export type weapon_traits =
   | 'Powered'
   | 'Charged'
@@ -70,8 +65,16 @@ export const JEWELRY_TRAITS: jewelry_traits[] = [
   'Swift',
 ];
 
-export const All_TRAITS: all_traits = {
+export interface all_traits_obj {
+  WEAPONS: weapon_traits[];
+  ARMOR: armor_traits[];
+  JEWELRY: jewelry_traits[];
+}
+
+export const All_TRAITS: all_traits_obj = {
   WEAPONS: WEAPON_TRAITS,
   ARMOR: ARMOR_TRAITS,
   JEWELRY: JEWELRY_TRAITS,
 };
+
+export type all_traits_list = weapon_traits | armor_traits | jewelry_traits;

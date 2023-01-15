@@ -16,12 +16,12 @@ export const WOOD_WEAPONS: wood_weapons[] = [
 ];
 export const WOOD_APPAREL: wood_apparel[] = ['Shield'];
 
+export const WOOD_ITEMS: wood_items = {
+  WOOD_WEAPONS,
+  WOOD_APPAREL,
+};
+
 export interface wood_items {
   WOOD_WEAPONS: wood_weapons[];
   WOOD_APPAREL: wood_apparel[];
 }
-
-export const METAL_ITEMS: wood_items = {
-  WOOD_WEAPONS: WOOD_WEAPONS,
-  WOOD_APPAREL: WOOD_APPAREL,
-};
