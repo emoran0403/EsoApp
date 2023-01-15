@@ -1,0 +1,21 @@
+<div>
+  <div>My Writs</div>
+
+  <div>
+    <button>Blacksmithing</button>
+    <button>Clothing</button>
+    <button>Woodworking</button>
+  </div>
+
+  <div>
+    <div>Sort By</div>
+    <button>Close to completion</button>
+    <button>Best Value</button>
+  </div>
+
+  <div>
+    <div *ngfor="let writ of writs">
+      <app-writ-card [writ]="writ"></app-writ-card>
+    </div>
+  </div>
+</div>
