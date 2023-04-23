@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestcomponentComponent } from './testcomponent/testcomponent.component';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { WritsComponent } from './writs/writs.component';
 import { NewWritComponent } from './writs/new-writ/new-writ.component';
 import { PlayerWritsComponent } from './writs/player-writs/player-writs.component';
 
-const ANGULAR_MATERIAL = [MatSlideToggleModule];
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+
+const ANGULAR_MATERIAL = [MatSlideToggleModule, MatSelectModule];
 
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
 const CHILDREN_COMPONENTS = [NewWritComponent, PlayerWritsComponent];
