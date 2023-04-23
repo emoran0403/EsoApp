@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import { QUALITY, WRIT_TYPE } from 'constants/writs';
+import { mat_option } from 'models';
 
 @Component({
   selector: 'new-writ',
@@ -12,12 +9,9 @@ interface Food {
 })
 export class NewWritComponent implements OnInit {
   constructor() {}
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
 
+  readonly writTypeOptions: mat_option[] = WRIT_TYPE;
+  readonly qualities: mat_option[] = QUALITY;
   ngOnInit() {
     return;
   }
