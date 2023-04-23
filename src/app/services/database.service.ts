@@ -24,4 +24,23 @@ export class DatabaseService {
         break;
     }
   };
+
+  // this needs to contact the server with the required information
+  contactDB = {
+    GET: {
+      playerWrits: 'gets player entered writs',
+      loginInfo: 'gets player login info',
+      unlockData: 'gets style and trait info',
+    },
+    POST: {
+      newPlayer: 'creates style and trait tables for a new player',
+    },
+    PUT: {
+      updatePlayerInfo: 'updates player info table with new player info',
+      updateTrait: 'updates a trait table',
+      updateStyle: 'updates a style table',
+    },
+    // i dont think ill need this
+    DELETE: {},
+  };
 }

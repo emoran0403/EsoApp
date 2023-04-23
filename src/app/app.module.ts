@@ -3,22 +3,36 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SelectorComponent } from './components/selector/selector.component';
-import { ButtonListComponent } from './components/button-list/button-list.component';
-import { WritCardComponent } from './components/writ-card/writ-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TestcomponentComponent } from './testcomponent/testcomponent.component';
+
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { WritsComponent } from './writs/writs.component';
+import { NewWritComponent } from './writs/new-writ/new-writ.component';
+import { PlayerWritsComponent } from './writs/player-writs/player-writs.component';
+
+const ANGULAR_MATERIAL = [MatSlideToggleModule];
+
+//! I should be able to wrap these within their parent module, but not sure how to do that yet
+const CHILDREN_COMPONENTS = [NewWritComponent, PlayerWritsComponent];
+
+//* Parent modules
+const PARENT_MODULES = [WritsComponent];
 
 @NgModule({
   declarations: [
     AppComponent,
-    SelectorComponent,
-    ButtonListComponent,
-    WritCardComponent
+    TestcomponentComponent,
+    ...PARENT_MODULES,
+    ...CHILDREN_COMPONENTS,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ...ANGULAR_MATERIAL,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

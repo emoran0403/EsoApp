@@ -13,6 +13,89 @@ export const ALL_ITEMS_OBJ: all_items_obj = {
   CLOTHING_ITEMS,
   WOOD_ITEMS,
 };
+export type all_jewelry_list = 'Necklace' | 'Ring';
+
+export const ALL_JEWLERY_LIST: all_jewelry_list[] = ['Necklace', 'Ring'];
+
+export const ALL_WEAPONS_LIST: all_weapons_list[] = [
+  'Axe',
+  'Mace',
+  'Sword',
+  'Battle Axe',
+  'Maul',
+  'Greatsword',
+  'Dagger',
+  'Bow',
+  'Inferno Staff',
+  'Ice Staff',
+  'Lightning Staff',
+  'Restoration Staff',
+];
+
+export type all_weapons_list =
+  | 'Axe'
+  | 'Mace'
+  | 'Sword'
+  | 'Battle Axe'
+  | 'Maul'
+  | 'Greatsword'
+  | 'Dagger'
+  | 'Bow'
+  | 'Inferno Staff'
+  | 'Ice Staff'
+  | 'Lightning Staff'
+  | 'Restoration Staff';
+
+export const ALL_APPAREL_LIST: all_apparel_list[] = [
+  'Shield',
+  'Robe',
+  'Shirt',
+  'Shoes',
+  'Gloves',
+  'Hat',
+  'Breeches',
+  'Epaulets',
+  'Sash',
+  'Jack',
+  'Boots',
+  'Bracers',
+  'Helmet',
+  'Guards',
+  'Arm Cops',
+  'Belt',
+  'Curaiss',
+  'Sabatons',
+  'Gauntlets',
+  'Helm',
+  'Greaves',
+  'Pauldron',
+  'Girdle',
+];
+
+export type all_apparel_list =
+  | 'Shield'
+  | 'Robe'
+  | 'Shirt'
+  | 'Shoes'
+  | 'Gloves'
+  | 'Hat'
+  | 'Breeches'
+  | 'Epaulets'
+  | 'Sash'
+  | 'Jack'
+  | 'Boots'
+  | 'Bracers'
+  | 'Helmet'
+  | 'Guards'
+  | 'Arm Cops'
+  | 'Belt'
+  | 'Curaiss'
+  | 'Sabatons'
+  | 'Gauntlets'
+  | 'Helm'
+  | 'Greaves'
+  | 'Pauldron'
+  | 'Girdle';
 
 export type all_items_list =
   | 'Battle Axe'
