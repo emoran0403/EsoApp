@@ -35,12 +35,19 @@ export const METAL_APPAREL: metal_apparel[] = [
   'Girdle',
 ];
 
-export interface metal_items {
+export interface metal_items_obj {
   METAL_WEAPONS: metal_weapons[];
   METAL_APPAREL: metal_apparel[];
 }
 
-export const METAL_ITEMS: metal_items = {
+export const METAL_ITEMS_OBJ: metal_items_obj = {
   METAL_WEAPONS,
   METAL_APPAREL,
 };
+
+export type metal_items_arr = metal_weapons | metal_apparel;
+
+export const METAL_ITEMS_ARR: metal_items_arr[] = [
+  ...METAL_WEAPONS,
+  ...METAL_APPAREL,
+];

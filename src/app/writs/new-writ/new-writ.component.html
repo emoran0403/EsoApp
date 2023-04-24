@@ -1,3 +1,37 @@
-<div>
-  <h1>hello from new writ</h1>
+<h1>hello from new writ</h1>
+<div class="page">
+  <div class="form">
+    <div class="form-elem">
+      <div>
+        <p>Writ Type</p>
+      </div>
+      <select [(ngModel)]="writType" (change)="writTypeChange($event)">
+        <option *ngFor="let option of writTypeOptions">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-elem">
+      <div>
+        <p>Quality</p>
+      </div>
+      <select [(ngModel)]="quality" (change)="qualityChange($event)">
+        <option *ngFor="let quality of qualities">
+          {{ quality }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-elem">
+      <div>
+        <p>Item</p>
+      </div>
+      <select [(ngModel)]="item" (change)="itemChange($event)">
+        <option *ngFor="let item of blacksmithingItems">
+          {{ item }}
+        </option>
+      </select>
+    </div>
+  </div>
 </div>

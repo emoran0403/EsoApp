@@ -1,15 +1,15 @@
-import { metal_items, METAL_ITEMS } from './blacksmithing';
+import { metal_items_obj, METAL_ITEMS_OBJ } from './blacksmithing';
 import { clothing_items, CLOTHING_ITEMS } from './clothing';
 import { wood_items, WOOD_ITEMS } from './woodworking';
 
 export interface all_items_obj {
-  METAL_ITEMS: metal_items;
+  METAL_ITEMS_OBJ: metal_items_obj;
   CLOTHING_ITEMS: clothing_items;
   WOOD_ITEMS: wood_items;
 }
 
 export const ALL_ITEMS_OBJ: all_items_obj = {
-  METAL_ITEMS,
+  METAL_ITEMS_OBJ,
   CLOTHING_ITEMS,
   WOOD_ITEMS,
 };

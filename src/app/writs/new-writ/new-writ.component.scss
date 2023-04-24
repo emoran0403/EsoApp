@@ -1,0 +1,7 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  &-elem {
+    margin: 0 1rem;
+  }
+}
