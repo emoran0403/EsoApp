@@ -13,9 +13,9 @@ export const ALL_ITEMS_OBJ: all_items_obj = {
   CLOTHING_ITEMS,
   WOOD_ITEMS,
 };
-export type all_jewelry_list = 'Necklace' | 'Ring';
+export type Jewelery_items_arr = 'Necklace' | 'Ring';
 
-export const ALL_JEWLERY_LIST: all_jewelry_list[] = ['Necklace', 'Ring'];
+export const JEWELERY_ITEMS_ARR: Jewelery_items_arr[] = ['Necklace', 'Ring'];
 
 export const ALL_WEAPONS_LIST: all_weapons_list[] = [
   'Axe',

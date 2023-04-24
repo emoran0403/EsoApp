@@ -18,7 +18,7 @@ export type armor_traits =
   | 'Invigorating'
   | 'Divines'
   | 'Nirnhoned';
-export type jewelry_traits =
+export type Jewelery_traits =
   | 'Healthy'
   | 'Arcane'
   | 'Robust'
@@ -53,7 +53,7 @@ export const ARMOR_TRAITS: armor_traits[] = [
   'Nirnhoned',
 ];
 
-export const JEWELRY_TRAITS: jewelry_traits[] = [
+export const JEWELERY_TRAITS: Jewelery_traits[] = [
   'Healthy',
   'Arcane',
   'Robust',
@@ -68,13 +68,13 @@ export const JEWELRY_TRAITS: jewelry_traits[] = [
 export interface all_traits_obj {
   WEAPONS: weapon_traits[];
   ARMOR: armor_traits[];
-  JEWELRY: jewelry_traits[];
+  JEWELERY: Jewelery_traits[];
 }
 
 export const All_TRAITS: all_traits_obj = {
   WEAPONS: WEAPON_TRAITS,
   ARMOR: ARMOR_TRAITS,
-  JEWELRY: JEWELRY_TRAITS,
+  JEWELERY: JEWELERY_TRAITS,
 };
 
-export type all_traits_list = weapon_traits | armor_traits | jewelry_traits;
+export type all_traits_list = weapon_traits | armor_traits | Jewelery_traits;

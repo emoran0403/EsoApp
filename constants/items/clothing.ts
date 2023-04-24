@@ -46,3 +46,9 @@ export const CLOTHING_ITEMS: clothing_items = {
   CLOTH_APPAREL: CLOTH_APPAREL,
   LEATHER_APPAREL: LEATHER_APPAREL,
 };
+
+export type clothing_items_arr = cloth_apparel | leather_apparel;
+export const CLOTHING_ITEMS_ARR: clothing_items_arr[] = [
+  ...CLOTH_APPAREL,
+  ...LEATHER_APPAREL,
+];

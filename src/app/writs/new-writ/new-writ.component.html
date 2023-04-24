@@ -1,6 +1,7 @@
 <h1>hello from new writ</h1>
 <div class="page">
   <div class="form">
+    <!-- Writ Type -->
     <div class="form-elem">
       <div>
         <p>Writ Type</p>
@@ -11,7 +12,7 @@
         </option>
       </select>
     </div>
-
+    <!-- Quality  -->
     <div class="form-elem">
       <div>
         <p>Quality</p>
@@ -22,16 +23,85 @@
         </option>
       </select>
     </div>
-
-    <div class="form-elem">
-      <div>
-        <p>Item</p>
+    <!-- Items Switch Case -->
+    <div [ngSwitch]="writType">
+      <!-- Blacksmithing Items -->
+      <div class="form-elem" *ngSwitchCase="'Blacksmithing'">
+        <div>
+          <p>Item</p>
+        </div>
+        <select [(ngModel)]="item" (change)="itemChange($event)">
+          <option *ngFor="let item of blacksmithingItems">
+            {{ item }}
+          </option>
+        </select>
       </div>
-      <select [(ngModel)]="item" (change)="itemChange($event)">
-        <option *ngFor="let item of blacksmithingItems">
-          {{ item }}
-        </option>
-      </select>
+      <!-- Clothing Items -->
+      <div class="form-elem" *ngSwitchCase="'Clothing'">
+        <div>
+          <p>Item</p>
+        </div>
+        <select [(ngModel)]="item" (change)="itemChange($event)">
+          <option *ngFor="let item of clothingItems">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <!-- Woodworking Items -->
+      <div class="form-elem" *ngSwitchCase="'Woodworking'">
+        <div>
+          <p>Item</p>
+        </div>
+        <select [(ngModel)]="item" (change)="itemChange($event)">
+          <option *ngFor="let item of woodItems">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <!-- Jewelery Items -->
+      <div class="form-elem" *ngSwitchCase="'Jewelery'">
+        <div>
+          <p>Item</p>
+        </div>
+        <select [(ngModel)]="item" (change)="itemChange($event)">
+          <option *ngFor="let item of JeweleryItems">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <!-- Weapon Traits -->
+      <div class="form-elem" *ngIf="showWeaponTraits">
+        <div>
+          <p>Trait</p>
+        </div>
+        <select [(ngModel)]="trait" (change)="itemChange($event)">
+          <option *ngFor="let trait of weaponTraits">
+            {{ trait }}
+          </option>
+        </select>
+      </div>
+      <!-- Armor Traits -->
+      <div class="form-elem" *ngIf="showArmorTraits">
+        <div>
+          <p>Trait</p>
+        </div>
+        <select [(ngModel)]="trait" (change)="itemChange($event)">
+          <option *ngFor="let trait of armorTraits">
+            {{ trait }}
+          </option>
+        </select>
+      </div>
+      <!-- Jewelery Traits -->
+      <div class="form-elem" *ngIf="showJeweleryTraits">
+        <div>
+          <p>Trait</p>
+        </div>
+        <select [(ngModel)]="trait" (change)="itemChange($event)">
+          <option *ngFor="let trait of JeweleryTraits">
+            {{ trait }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </div>

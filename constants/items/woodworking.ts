@@ -25,3 +25,9 @@ export interface wood_items {
   WOOD_WEAPONS: wood_weapons[];
   WOOD_APPAREL: wood_apparel[];
 }
+
+export type wood_items_arr = wood_weapons | wood_apparel;
+export const WOOD_ITEMS_ARR: wood_items_arr[] = [
+  ...WOOD_WEAPONS,
+  ...WOOD_APPAREL,
+];
