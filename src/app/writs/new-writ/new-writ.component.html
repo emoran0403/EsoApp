@@ -1,5 +1,10 @@
 <h1>hello from new writ</h1>
 <div class="page">
+  <div class="page-header">
+    <div>
+      <p>Input your writ information below</p>
+    </div>
+  </div>
   <div class="form">
     <!-- Writ Type -->
     <div class="form-elem">
@@ -23,7 +28,7 @@
         </option>
       </select>
     </div>
-    <!-- Items Switch Case -->
+    <!-- Items -->
     <div [ngSwitch]="writType">
       <!-- Blacksmithing Items -->
       <div
@@ -77,6 +82,9 @@
           </option>
         </select>
       </div>
+    </div>
+    <!-- Traits  -->
+    <div>
       <!-- Weapon Traits -->
       <div id="weaponTraits" class="form-elem" *ngIf="showWeaponTraits">
         <div>
@@ -142,10 +150,15 @@
         class="rewardInput"
         type="number"
         min="0"
-        step="1"
-        pattern="\d+"
+        [(ngModel)]="reward"
         (change)="rewardChanged($event)"
       />
+    </div>
+    <div>
+      <div>
+        <button (click)="submitWrit()">Submit</button>
+        <button (click)="resetAll()">Clear</button>
+      </div>
     </div>
   </div>
 </div>

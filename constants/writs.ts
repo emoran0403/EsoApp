@@ -4,10 +4,11 @@ import { styles } from 'constants/styles/styles';
 import { all_traits_list } from 'constants/traits/traits';
 
 export interface writ {
+  is_jewelery: boolean;
   item: all_items_list;
   quality: item_quality;
   trait: all_traits_list;
-  set: armor_sets;
+  armorSet: armor_sets;
   style: styles;
   reward: number;
 }

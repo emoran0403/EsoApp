@@ -26,7 +26,7 @@ import {
   Jewelery_traits,
   all_traits_list,
 } from 'constants/traits/traits';
-import { QUALITY, WRIT_TYPE, writ_type_options } from 'constants/writs';
+import { QUALITY, WRIT_TYPE, writ, writ_type_options } from 'constants/writs';
 
 @Component({
   selector: 'new-writ',
@@ -48,9 +48,10 @@ export class NewWritComponent implements OnInit {
   readonly JeweleryTraits: Jewelery_traits[] = JEWELERY_TRAITS;
   readonly armorSets: armor_sets[] = ALL_SETS.sort();
   readonly styles: styles[] = STYLES.sort();
+  readonly posIntRegex: RegExp = new RegExp('^[0-9]*[1-9][0-9]*$');
 
-  writType: writ_type_options;
-  quality: item_quality;
+  writType: writ_type_options | null;
+  quality: item_quality | null;
   item: all_items_list | null;
   trait: all_traits_list | null;
   armorSet: armor_sets | null;
@@ -66,29 +67,38 @@ export class NewWritComponent implements OnInit {
     // console.log(event.target.value);
     switch (event.target.value) {
       case 'Jewelery':
-        this.clearWritInfo();
+        this.resetWritInfo();
         this.showJeweleryTraits = true;
         this.showStyle = false;
         break;
       case 'Blacksmithing':
-        this.clearWritInfo();
+        this.resetWritInfo();
         this.showStyle = true;
 
         break;
       case 'Woodworking':
-        this.clearWritInfo();
+        this.resetWritInfo();
         this.showStyle = true;
 
         break;
       case 'Clothing':
-        this.clearWritInfo();
+        this.resetWritInfo();
         this.showStyle = true;
 
         break;
     }
   }
 
-  clearWritInfo(): void {
+  resetAll(): void {
+    this.resetWritInfo();
+    this.resetWritType();
+    this.resetQuality();
+    this.resetReward();
+    this.showJeweleryTraits = false;
+    this.showStyle = false;
+  }
+
+  resetWritInfo(): void {
     this.setTraitDisplayToFalse();
     this.resetItemsAndTraits();
     this.resetArmorSet();
@@ -106,18 +116,21 @@ export class NewWritComponent implements OnInit {
     this.resetTrait();
   }
 
+  resetWritType(): void {
+    this.writType = null;
+  }
+  resetQuality(): void {
+    this.quality = null;
+  }
   resetTrait(): void {
     this.trait = null;
   }
-
   resetArmorSet(): void {
     this.armorSet = null;
   }
-
   resetStyle(): void {
     this.style = null;
   }
-
   resetReward(): void {
     this.reward = 0;
   }
@@ -125,25 +138,25 @@ export class NewWritComponent implements OnInit {
   qualityChange(event: any): void {
     this.quality = event.target.value;
   }
-
   traitChanged(event: any): void {
     this.trait = event.target.value;
   }
-
   armorSetChange(event: any): void {
     this.armorSet = event.target.value;
   }
-
   styleChange(event: any): void {
     this.style = event.target.value;
   }
-
   rewardChanged(event: any): void {
-    console.log('event - ', event);
-    console.log('value - ', event.target.value);
+    console.log('value: ', event.target.value);
+    const reward = event.target.value;
+    const isValid = this.posIntRegex.test(reward);
+    console.log({ reward, isValid });
 
-    if (event.charCode >= 48) {
+    if (isValid) {
       this.reward = event.target.value;
+    } else {
+      this.reward = 0;
     }
   }
 
@@ -166,6 +179,23 @@ export class NewWritComponent implements OnInit {
         this.showArmorTraits = true;
       }
     }
+  }
+
+  writIsValid(writ: writ): boolean {
+    return true;
+  }
+
+  submitWrit(): void {
+    const writToSubmit: writ = {
+      is_jewelery: this.writType === 'Jewelery' ? true : false,
+      quality: this.quality,
+      item: this.item,
+      trait: this.trait,
+      armorSet: this.armorSet,
+      style: this.style,
+      reward: this.reward,
+    };
+    console.log('submitting writ: ', writToSubmit);
   }
 
   ngOnInit() {
