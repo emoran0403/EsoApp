@@ -27,6 +27,7 @@ import {
   all_traits_list,
 } from 'constants/traits/traits';
 import { QUALITY, WRIT_TYPE, writ, writ_type_options } from 'constants/writs';
+import { isNil } from 'lodash';
 
 @Component({
   selector: 'new-writ',
@@ -56,7 +57,7 @@ export class NewWritComponent implements OnInit {
   trait: all_traits_list | null;
   armorSet: armor_sets | null;
   style: styles | null;
-  reward: number = 0;
+  reward: number | null;
 
   showWeaponTraits: boolean = false;
   showArmorTraits: boolean = false;
@@ -132,7 +133,7 @@ export class NewWritComponent implements OnInit {
     this.style = null;
   }
   resetReward(): void {
-    this.reward = 0;
+    this.reward = null;
   }
 
   qualityChange(event: any): void {
@@ -147,17 +148,30 @@ export class NewWritComponent implements OnInit {
   styleChange(event: any): void {
     this.style = event.target.value;
   }
-  rewardChanged(event: any): void {
-    console.log('value: ', event.target.value);
-    const reward = event.target.value;
-    const isValid = this.posIntRegex.test(reward);
-    console.log({ reward, isValid });
 
-    if (isValid) {
-      this.reward = event.target.value;
-    } else {
-      this.reward = 0;
+  handleBeforeInput(event: any): void {
+    // console.log('event', event);
+    // allow backspace and delete to work as intended
+    if (
+      event.inputType === 'deleteContentBackward' ||
+      event.inputType === 'deleteContentForward'
+    )
+      return;
+
+    // prevent those characters that get past the 'number' input type
+    if (
+      event.data === null ||
+      event.data.includes('-') ||
+      event.data.includes('+') ||
+      event.data.includes('.') ||
+      event.data.includes('e')
+    ) {
+      event.preventDefault();
     }
+  }
+
+  rewardChanged(event: any): void {
+    this.reward = Number.parseInt(event.target.value);
   }
 
   itemChange(event: any): void {
@@ -182,7 +196,9 @@ export class NewWritComponent implements OnInit {
   }
 
   writIsValid(writ: writ): boolean {
-    return true;
+    return !Object.values(writ)
+      .map((value) => isNil(value))
+      .includes(true);
   }
 
   submitWrit(): void {
@@ -195,7 +211,14 @@ export class NewWritComponent implements OnInit {
       style: this.style,
       reward: this.reward,
     };
+
     console.log('submitting writ: ', writToSubmit);
+    if (this.writIsValid(writToSubmit)) {
+      //make service call to submit writ
+      // this.resetAll();
+      return;
+    }
+    console.log('writ is not valid!');
   }
 
   ngOnInit() {

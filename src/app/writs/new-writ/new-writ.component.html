@@ -152,6 +152,7 @@
         min="0"
         [(ngModel)]="reward"
         (change)="rewardChanged($event)"
+        (beforeinput)="handleBeforeInput($event)"
       />
     </div>
     <div>
