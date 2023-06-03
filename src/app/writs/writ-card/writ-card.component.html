@@ -1,20 +1,28 @@
-<div>
-  <div>
-    <p>{{ writ.quality }}</p>
+<div class="card border border-2 border-dark rounded">
+  <div class="card-body">
+    <h5 class="card-title">{{ writ.quality }} {{ writ.item }}</h5>
+    <p class="card-text">{{ writ.reward }} Vouchers</p>
   </div>
-  <div>
-    <p>{{ writ.item }}</p>
-  </div>
-  <div>
-    <p>{{ writ.trait }}</p>
-  </div>
-  <div>
-    <p>{{ writ.armorSet }}</p>
-  </div>
-  <div>
-    <p>{{ writ.style }}</p>
-  </div>
-  <div>
-    <p>{{ writ.reward }}</p>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ writ.trait }}</li>
+    <li class="list-group-item">{{ writ.armorSet }}</li>
+    <li class="list-group-item">{{ writ.style }}</li>
+  </ul>
+  <div class="body">
+    <div class="d-flex justify-content-center">
+      <button
+        *ngIf="displayCompletion"
+        class="btn btn-primary"
+        (click)="toggle()"
+      >
+        Mark Complete
+      </button>
+      <div *ngIf="!displayCompletion">
+        <button class="btn btn-success mx-2" (click)="completeWrit()">
+          Yes
+        </button>
+        <button class="btn btn-danger mx-3" (click)="toggle()">No</button>
+      </div>
+    </div>
   </div>
 </div>

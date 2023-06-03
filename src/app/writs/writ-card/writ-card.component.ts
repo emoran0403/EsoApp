@@ -8,7 +8,17 @@ import { writ } from 'constants/writs';
 })
 export class WritCardComponent implements OnInit {
   @Input() writ: writ;
+  displayCompletion: boolean = true;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  toggle(): void {
+    this.displayCompletion = !this.displayCompletion;
+  }
+
+  completeWrit(): void {
+    console.log('Completing writ: ', this.writ);
+  }
 }
