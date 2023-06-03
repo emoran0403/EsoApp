@@ -13,6 +13,11 @@ export interface writ {
   reward: number;
 }
 
+export interface fe_writ extends writ {
+  hasTrait: boolean;
+  hasArmorSet: boolean;
+  hasStyle: boolean;
+}
 export type writ_type_options =
   | 'Blacksmithing'
   | 'Woodworking'
