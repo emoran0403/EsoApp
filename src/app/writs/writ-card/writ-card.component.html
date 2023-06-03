@@ -1,12 +1,30 @@
 <div class="card border border-2 border-dark rounded">
-  <div class="card-body">
+  <div
+    class="card-body"
+    [ngClass]="isCompletable ? 'bg-success' : 'bg-warning-subtle'"
+  >
     <h5 class="card-title">{{ writ.quality }} {{ writ.item }}</h5>
     <p class="card-text">{{ writ.reward }} Vouchers</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ writ.trait }}</li>
-    <li class="list-group-item">{{ writ.armorSet }}</li>
-    <li class="list-group-item">{{ writ.style }}</li>
+    <li
+      class="list-group-item"
+      [ngClass]="hasTrait ? 'bg-success-subtle' : 'bg-warning-subtle'"
+    >
+      {{ writ.trait }}
+    </li>
+    <li
+      class="list-group-item"
+      [ngClass]="hasArmorSet ? 'bg-success-subtle' : 'bg-warning-subtle'"
+    >
+      {{ writ.armorSet }}
+    </li>
+    <li
+      class="list-group-item"
+      [ngClass]="hasStyle ? 'bg-success-subtle' : 'bg-warning-subtle'"
+    >
+      {{ writ.style }}
+    </li>
   </ul>
   <div class="body">
     <div class="d-flex justify-content-center">

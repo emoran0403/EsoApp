@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { writ } from 'constants/writs';
+import { fe_writ } from 'constants/writs';
 
 @Component({
   selector: 'player-writs',
@@ -7,7 +7,7 @@ import { writ } from 'constants/writs';
   styleUrls: ['./player-writs.component.scss'],
 })
 export class PlayerWritsComponent implements OnInit {
-  writs: writ[] = [
+  writs: fe_writ[] = [
     {
       is_jewelery: false,
       item: 'Arm Cops',
@@ -16,6 +16,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -25,6 +28,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -34,6 +40,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -43,6 +52,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -52,6 +64,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -61,6 +76,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -70,6 +88,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -79,6 +100,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -88,6 +112,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -97,6 +124,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -106,6 +136,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
     {
       is_jewelery: false,
@@ -115,6 +148,9 @@ export class PlayerWritsComponent implements OnInit {
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
       reward: 100,
+      hasTrait: true,
+      hasArmorSet: true,
+      hasStyle: true,
     },
   ];
   constructor() {}
