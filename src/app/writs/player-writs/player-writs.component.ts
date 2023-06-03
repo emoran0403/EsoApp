@@ -15,10 +15,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Sturdy',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -27,10 +27,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Triune',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -39,10 +39,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Nirnhoned',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -51,10 +51,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Sturdy',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -63,10 +63,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Triune',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -75,10 +75,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Nirnhoned',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -87,10 +87,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Sturdy',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -99,10 +99,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Triune',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -111,10 +111,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Nirnhoned',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -123,10 +123,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Sturdy',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -135,10 +135,10 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Triune',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
     {
       is_jewelery: false,
@@ -147,13 +147,57 @@ export class PlayerWritsComponent implements OnInit {
       trait: 'Nirnhoned',
       armorSet: 'Dauntless Combatant',
       style: 'Ancestral Nord',
-      reward: 100,
-      hasTrait: true,
-      hasArmorSet: true,
-      hasStyle: true,
+      reward: Math.floor(Math.random() * 100),
+      hasTrait: Math.random() >= 0.35 ? true : false,
+      hasArmorSet: Math.random() >= 0.35 ? true : false,
+      hasStyle: Math.random() >= 0.35 ? true : false,
     },
   ];
   constructor() {}
 
+  sortAscending: boolean = false;
+
   ngOnInit(): void {}
+
+  /**
+   * Sorts the writ array so writs that are completable are listed first, then by reward
+   */
+  sortCompletable() {
+    let tempWrits = [...this.writs];
+
+    tempWrits.sort((a, b) => {
+      return b.reward - a.reward;
+    });
+
+    tempWrits.sort((a, b) => {
+      const trueCountA = [a.hasTrait, a.hasArmorSet, a.hasStyle].filter(
+        Boolean
+      ).length;
+      const trueCountB = [b.hasTrait, b.hasArmorSet, b.hasStyle].filter(
+        Boolean
+      ).length;
+
+      return trueCountB - trueCountA;
+    });
+
+    this.writs = [...tempWrits];
+  }
+
+  /**
+   * Sorts the writ array based on reward, and toggles the ascending boolean so the next sort is also toggled
+   */
+  sortReward(): void {
+    let tempWrits = [...this.writs];
+
+    tempWrits.sort((a, b) => {
+      if (this.sortAscending) {
+        return a.reward - b.reward;
+      } else {
+        return b.reward - a.reward;
+      }
+    });
+
+    this.writs = [...tempWrits];
+    this.sortAscending = !this.sortAscending;
+  }
 }

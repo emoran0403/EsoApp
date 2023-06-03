@@ -14,20 +14,26 @@ export class WritCardComponent implements OnInit {
 
   // background color display booleans
   // !?! (2) - issue with setting values based on incoming writ
-  // hasTrait: boolean = this.writ.hasTrait;
-  // hasArmorSet: boolean = this.writ.hasArmorSet;
-  // hasStyle: boolean = this.writ.hasStyle;
-  // isCompletable: boolean =
-  //   this.writ.hasTrait && this.writ.hasArmorSet && this.writ.hasStyle;
 
-  hasTrait: boolean = true;
-  hasArmorSet: boolean = true;
-  hasStyle: boolean = true;
-  isCompletable: boolean = this.hasTrait && this.hasArmorSet && this.hasStyle;
+  hasTrait: boolean;
+  hasArmorSet: boolean;
+  hasStyle: boolean;
+  isCompletable: boolean;
+
+  // hasTrait: boolean = true;
+  // hasArmorSet: boolean = true;
+  // hasStyle: boolean = true;
+  // isCompletable: boolean = this.hasTrait && this.hasArmorSet && this.hasStyle;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.hasTrait = this.writ.hasTrait;
+    this.hasArmorSet = this.writ.hasArmorSet;
+    this.hasStyle = this.writ.hasStyle;
+    this.isCompletable =
+      this.writ.hasTrait && this.writ.hasArmorSet && this.writ.hasStyle;
+  }
 
   toggle(): void {
     this.displayCompletion = !this.displayCompletion;
