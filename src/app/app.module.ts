@@ -12,6 +12,8 @@ import { PlayerWritsComponent } from './writs/player-writs/player-writs.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { WritCardComponent } from './writs/writ-card/writ-card.component';
+import { TraitsComponent } from './traits/traits.component';
+import { StylesComponent } from './styles/styles.component';
 
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
 const CHILDREN_COMPONENTS = [
@@ -24,7 +26,7 @@ const CHILDREN_COMPONENTS = [
 const PARENT_MODULES = [WritsComponent];
 
 @NgModule({
-  declarations: [AppComponent, ...PARENT_MODULES, ...CHILDREN_COMPONENTS],
+  declarations: [AppComponent, ...PARENT_MODULES, ...CHILDREN_COMPONENTS, TraitsComponent, StylesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
