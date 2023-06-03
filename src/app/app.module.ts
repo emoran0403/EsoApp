@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 
 import { WritsComponent } from './writs/writs.component';
 import { NewWritComponent } from './writs/new-writ/new-writ.component';
 import { PlayerWritsComponent } from './writs/player-writs/player-writs.component';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { WritCardComponent } from './writs/writ-card/writ-card.component';
+
 import { TraitsComponent } from './traits/traits.component';
 import { StylesComponent } from './styles/styles.component';
 
@@ -20,13 +20,14 @@ const CHILDREN_COMPONENTS = [
   NewWritComponent,
   PlayerWritsComponent,
   WritCardComponent,
+  TraitsComponent,
 ];
 
 //* Parent modules
-const PARENT_MODULES = [WritsComponent];
+const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
 
 @NgModule({
-  declarations: [AppComponent, ...PARENT_MODULES, ...CHILDREN_COMPONENTS, TraitsComponent, StylesComponent],
+  declarations: [AppComponent, ...PARENT_MODULES, ...CHILDREN_COMPONENTS],
   imports: [
     BrowserModule,
     AppRoutingModule,
