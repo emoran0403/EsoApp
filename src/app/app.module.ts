@@ -11,9 +11,14 @@ import { PlayerWritsComponent } from './writs/player-writs/player-writs.componen
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WritCardComponent } from './writs/writ-card/writ-card.component';
 
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
-const CHILDREN_COMPONENTS = [NewWritComponent, PlayerWritsComponent];
+const CHILDREN_COMPONENTS = [
+  NewWritComponent,
+  PlayerWritsComponent,
+  WritCardComponent,
+];
 
 //* Parent modules
 const PARENT_MODULES = [WritsComponent];

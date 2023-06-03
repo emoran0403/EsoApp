@@ -150,24 +150,21 @@ export class NewWritComponent implements OnInit {
   }
 
   handleBeforeInput(event: any): void {
-    // console.log('event', event);
     // allow backspace and delete to work as intended
-    if (
+    const allowedKey =
       event.inputType === 'deleteContentBackward' ||
-      event.inputType === 'deleteContentForward'
-    )
-      return;
+      event.inputType === 'deleteContentForward';
 
     // prevent those characters that get past the 'number' input type
-    if (
+    const disallowedKeys =
       event.data === null ||
       event.data.includes('-') ||
       event.data.includes('+') ||
       event.data.includes('.') ||
-      event.data.includes('e')
-    ) {
-      event.preventDefault();
-    }
+      event.data.includes('e');
+
+    if (allowedKey) return;
+    if (disallowedKeys) event.preventDefault();
   }
 
   rewardChanged(event: any): void {
@@ -214,7 +211,7 @@ export class NewWritComponent implements OnInit {
 
     console.log('submitting writ: ', writToSubmit);
     if (this.writIsValid(writToSubmit)) {
-      //make service call to submit writ
+      // make service call to submit writ
       // this.resetAll();
       return;
     }
