@@ -6,31 +6,33 @@
         <input
           type="radio"
           class="btn-check"
-          name="{{ name }}-learned"
-          id="{{ name }}-learned"
+          name="{{ name }}-{{ positive }}"
+          id="{{ name }}-{{ positive }}"
           autocomplete="off"
           value="true"
           (change)="choose(true)"
           [checked]="selectedOption === true"
         />
-        <label class="btn btn-outline-success" for="{{ name }}-learned"
-          >Learned</label
+        <label
+          class="btn btn-outline-success"
+          for="{{ name }}-{{ positive }}"
+          >{{ positive }}</label
         >
       </div>
       <div class="mx-2">
         <input
           type="radio"
           class="btn-check"
-          name="{{ name }}-locked"
-          id="{{ name }}-locked"
+          name="{{ name }}-{{ negative }}"
+          id="{{ name }}-{{ negative }}"
           autocomplete="off"
           value="false"
           (change)="choose(false)"
           [checked]="selectedOption === false"
         />
-        <label class="btn btn-outline-danger" for="{{ name }}-locked"
-          >Locked</label
-        >
+        <label class="btn btn-outline-danger" for="{{ name }}-{{ negative }}">{{
+          negative
+        }}</label>
       </div>
     </div>
   </div>

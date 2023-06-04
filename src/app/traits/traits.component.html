@@ -64,11 +64,17 @@
   </div>
   <!-- Traits -->
   <div class="row">
-    <div class="">
-      <unlock-button
-        *ngFor="let trait of weaponTraits; let i = index"
-        [name]="trait"
-      ></unlock-button>
-    </div>
+    <unlock-button
+      [name]="'Toggle All'"
+      [positive]="'Learned'"
+      [negative]="'Locked'"
+    ></unlock-button>
+    <unlock-button
+      *ngFor="let trait of weaponTraits; let i = index"
+      [id]="'${trait}-${i}'"
+      [name]="trait"
+      [positive]="'Learned'"
+      [negative]="'Locked'"
+    ></unlock-button>
   </div>
 </div>
