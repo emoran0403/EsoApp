@@ -27,5 +27,10 @@ export class TraitsComponent implements OnInit {
 
   shownTraits: 'armor' | 'weapons' | 'jewelery' = 'armor';
   shownItems;
+  chosenItem = 'Axe';
   ngOnInit(): void {}
+
+  itemChanged(event: any): void {
+    this.chosenItem = event.target.value;
+  }
 }

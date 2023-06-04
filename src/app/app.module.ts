@@ -17,6 +17,8 @@ import { StylesComponent } from './styles/styles.component';
 import { UnlockButtonComponent } from './shared/unlock-button/unlock-button.component';
 
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
+const SHARED_COMPONENTS = [UnlockButtonComponent];
+
 const CHILDREN_COMPONENTS = [
   NewWritComponent,
   PlayerWritsComponent,
@@ -28,7 +30,13 @@ const CHILDREN_COMPONENTS = [
 const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
 
 @NgModule({
-  declarations: [AppComponent, ...PARENT_MODULES, ...CHILDREN_COMPONENTS, UnlockButtonComponent],
+  declarations: [
+    AppComponent,
+    ...PARENT_MODULES,
+    ...CHILDREN_COMPONENTS,
+    ...SHARED_COMPONENTS,
+    UnlockButtonComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

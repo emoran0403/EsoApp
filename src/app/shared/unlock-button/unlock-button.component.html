@@ -1,1 +1,37 @@
-<p>unlock-button works!</p>
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title text-center">{{ name }}</h5>
+    <div class="d-flex justify-content-center">
+      <div class="mx-2">
+        <input
+          type="radio"
+          class="btn-check"
+          name="{{ name }}-learned"
+          id="{{ name }}-learned"
+          autocomplete="off"
+          value="true"
+          (change)="choose(true)"
+          [checked]="selectedOption === true"
+        />
+        <label class="btn btn-outline-success" for="{{ name }}-learned"
+          >Learned</label
+        >
+      </div>
+      <div class="mx-2">
+        <input
+          type="radio"
+          class="btn-check"
+          name="{{ name }}-locked"
+          id="{{ name }}-locked"
+          autocomplete="off"
+          value="false"
+          (change)="choose(false)"
+          [checked]="selectedOption === false"
+        />
+        <label class="btn btn-outline-danger" for="{{ name }}-locked"
+          >Locked</label
+        >
+      </div>
+    </div>
+  </div>
+</div>
