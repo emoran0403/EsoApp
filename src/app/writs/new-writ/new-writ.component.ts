@@ -23,7 +23,7 @@ import {
   ARMOR_TRAITS,
   JEWELERY_TRAITS,
   armor_traits,
-  Jewelery_traits,
+  jewelery_traits,
   all_traits_list,
 } from 'constants/traits/traits';
 import { QUALITY, WRIT_TYPE, writ, writ_type_options } from 'constants/writs';
@@ -46,7 +46,7 @@ export class NewWritComponent implements OnInit {
   readonly weaponTraits: weapon_traits[] = WEAPON_TRAITS_ARR;
   readonly weapons: all_weapons_list[] = ALL_WEAPONS_LIST;
   readonly armorTraits: armor_traits[] = ARMOR_TRAITS;
-  readonly JeweleryTraits: Jewelery_traits[] = JEWELERY_TRAITS;
+  readonly JeweleryTraits: jewelery_traits[] = JEWELERY_TRAITS;
   readonly armorSets: armor_sets[] = ALL_SETS.sort();
   readonly styles: styles[] = STYLES.sort();
   readonly posIntRegex: RegExp = new RegExp('^[0-9]*[1-9][0-9]*$');
