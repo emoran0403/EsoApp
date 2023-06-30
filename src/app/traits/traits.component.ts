@@ -33,4 +33,8 @@ export class TraitsComponent implements OnInit {
   itemChanged(event: any): void {
     this.chosenItem = event.target.value;
   }
+
+  onoptionSelected(wow: any): void {
+    console.log('wow: ', wow);
+  }
 }

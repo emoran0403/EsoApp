@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'unlock-button',
@@ -9,17 +16,24 @@ export class UnlockButtonComponent implements OnInit {
   @Input() name: string; // Display for the header
   @Input() positive: string; // Display for the affirmative option
   @Input() negative: string; // Display for the negative option
-  @Input() chosenOption: string; // Input for outside control
+  @Input() outsideOption: string; // Input for outside control
+  @Output() optionSelected = new EventEmitter();
   constructor() {}
 
-  selectedOption: boolean | string = false; // Set the default value
+  chosenOption: boolean | string = false; // Set the default value
 
   ngOnInit(): void {}
+
   choose(choice: boolean): void {
-    this.selectedOption = choice;
+    this.chosenOption = choice;
+    this.optionSelected.emit([this.name, choice]);
+    console.log('choice: ', choice);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['chosenOption']) this.selectedOption = this.chosenOption;
+    if (changes['outsideOption']) {
+      this.chosenOption = this.outsideOption;
+      console.log('this.selectedOption: ', this.chosenOption);
+    }
   }
 }

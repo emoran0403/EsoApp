@@ -11,7 +11,7 @@
           autocomplete="off"
           value="true"
           (change)="choose(true)"
-          [checked]="selectedOption === true"
+          [checked]="chosenOption === true"
         />
         <label
           class="btn btn-outline-success"
@@ -28,7 +28,7 @@
           autocomplete="off"
           value="false"
           (change)="choose(false)"
-          [checked]="selectedOption === false"
+          [checked]="chosenOption === false"
         />
         <label class="btn btn-outline-danger" for="{{ name }}-{{ negative }}">{{
           negative

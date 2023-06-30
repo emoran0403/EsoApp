@@ -68,6 +68,7 @@
       [name]="'Toggle All'"
       [positive]="'Learned'"
       [negative]="'Locked'"
+      (optionSelected)="onoptionSelected($event)"
     ></unlock-button>
     <unlock-button
       *ngFor="let trait of weaponTraits; let i = index"
@@ -75,6 +76,8 @@
       [name]="trait"
       [positive]="'Learned'"
       [negative]="'Locked'"
+      [outsideOption]=""
+      (optionSelected)="onoptionSelected($event)"
     ></unlock-button>
   </div>
 </div>
