@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { chain, size, groupBy, forEach } from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -17,22 +18,45 @@ export class DataService {
 
   /**
    * Consumes the response from the all traits query and outputs an object with the number of traits learned on each item
-   * @param data DB response for the all traits query
+   * @param rawData DB response for the all traits query
    * @returns An object describing the number of traits on each item
    */
-  countTraits(data: any[]): any {
-    const [traits] = data;
-    delete traits.player_uuid;
+  formatTraits(rawData: any[]): any {
+    const [rawCopy] = rawData;
+    delete rawCopy.player_uuid;
 
-    const occurrences = {};
+    const collectedItems = [];
 
-    for (const prop in traits) {
-      if (traits.hasOwnProperty(prop) && traits[prop] === true) {
-        const item = prop.split('_')[0];
-        occurrences[item] = (occurrences[item] || 0) + 1;
+    for (const entry in rawCopy) {
+      const value = rawCopy[entry];
+      const splitEntry = entry.split('_');
+      const splitEntryLength = size(splitEntry);
+
+      const trait = splitEntry[splitEntry.length - 1];
+      let item = '';
+      if (splitEntryLength === 3) {
+        item = splitEntry[0] + splitEntry[1];
+      } else {
+        item = splitEntry[0];
       }
+
+      collectedItems.push({ item: item, trait: trait, value: value });
     }
 
-    return occurrences;
+    const reducedItems = chain(collectedItems)
+      .groupBy('item')
+      .map((groupedItems, item) => {
+        const reducedObject = { item };
+
+        forEach(groupedItems, ({ trait, value }) => {
+          reducedObject[trait] = value;
+        });
+        return reducedObject;
+      })
+      .value();
+
+    console.log('reducedArr: ', reducedItems);
+
+    return reducedItems;
   }
 }

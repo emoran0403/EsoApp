@@ -14,7 +14,7 @@ import { TraitsService } from '../services/traits.service';
   templateUrl: './traits.component.html',
   styleUrls: ['./traits.component.scss'],
 })
-export class TraitsComponent implements OnInit, AfterViewInit {
+export class TraitsComponent implements OnInit {
   constructor(private readonly traits: TraitsService) {}
 
   readonly weaponTraits = WEAPON_TRAITS;
@@ -36,13 +36,9 @@ export class TraitsComponent implements OnInit, AfterViewInit {
       this.playerTraits = data;
     });
 
-    setTimeout(() => {
-      console.log('this.playerTraits: ', this.playerTraits);
-    }, 2000);
-  }
-
-  ngAfterViewInit(): void {
-    console.log('this.playerTraits: ', this.playerTraits);
+    // setTimeout(() => {
+    //   console.log('this.playerTraits: ', this.playerTraits);
+    // }, 2000);
   }
 
   itemChanged(event: any): void {

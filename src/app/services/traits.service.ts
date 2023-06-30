@@ -23,9 +23,7 @@ export class TraitsService {
 
     return this.http.get(url, { headers }).pipe(
       map((res: any) => {
-        const wow = this.data.countTraits(res);
-        console.log('wow: ', wow);
-        return this.data.countTraits(res);
+        return this.data.formatTraits(res);
       })
     );
   }
