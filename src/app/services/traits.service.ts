@@ -7,4 +7,8 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class TraitsService {
   constructor(private readonly http: HttpClient) {}
+
+  getAllTraits(): Observable<any> {
+    return this.http.get('http://localhost:3000/dev/esoapp/traits/all');
+  }
 }
