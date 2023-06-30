@@ -22,7 +22,6 @@ export class DataService {
    */
   countTraits(data: any[]): any {
     const [traits] = data;
-    const player_uuid = traits.player_uuid;
     delete traits.player_uuid;
 
     const occurrences = {};

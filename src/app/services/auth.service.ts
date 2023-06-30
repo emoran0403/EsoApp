@@ -6,5 +6,9 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  constructor(private readonly http: HttpClient) {}
+
+  login() {
+    return this.http.get('http://localhost:3000/dev/esoapp/users/login');
+  }
 }

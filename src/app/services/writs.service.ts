@@ -6,5 +6,5 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root',
 })
 export class WritsService {
-  constructor() {}
+  constructor(private readonly http: HttpClient) {}
 }

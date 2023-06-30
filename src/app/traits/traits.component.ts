@@ -35,6 +35,10 @@ export class TraitsComponent implements OnInit, AfterViewInit {
     this.traits.getAllTraits().subscribe((data) => {
       this.playerTraits = data;
     });
+
+    setTimeout(() => {
+      console.log('this.playerTraits: ', this.playerTraits);
+    }, 2000);
   }
 
   ngAfterViewInit(): void {
