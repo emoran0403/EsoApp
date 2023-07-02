@@ -15,6 +15,7 @@ import { WritCardComponent } from './writs/writ-card/writ-card.component';
 import { TraitsComponent } from './traits/traits.component';
 import { StylesComponent } from './styles/styles.component';
 import { UnlockButtonComponent } from './shared/unlock-button/unlock-button.component';
+import { SelectorComponent } from './shared/selector/selector.component';
 
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
 const SHARED_COMPONENTS = [UnlockButtonComponent];
@@ -36,6 +37,7 @@ const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
     ...CHILDREN_COMPONENTS,
     ...SHARED_COMPONENTS,
     UnlockButtonComponent,
+    SelectorComponent,
   ],
   imports: [
     BrowserModule,
