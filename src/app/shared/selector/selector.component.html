@@ -1,1 +1,13 @@
-<p>selector works!</p>
+<div class="form-floating">
+  <select
+    id="lol"
+    name="lol"
+    class="form-select"
+    [(ngModel)]="chosenItem"
+    (change)="itemChanged($event)"
+  >
+    <option *ngFor="let item of metalWeapons">
+      {{ item }}
+    </option></select
+  ><label for="lol" class="form-label">Item</label>
+</div>
