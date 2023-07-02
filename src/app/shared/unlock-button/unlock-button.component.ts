@@ -17,7 +17,8 @@ export class UnlockButtonComponent implements OnInit {
   @Input() positive: string; // Display for the affirmative option
   @Input() negative: string; // Display for the negative option
   @Input() outsideOption: string; // Input for outside control
-  @Output() optionSelected = new EventEmitter();
+  @Output() optionSelected: EventEmitter<[string, boolean]> =
+    new EventEmitter();
   constructor() {}
 
   chosenOption: boolean | string = false; // Set the default value

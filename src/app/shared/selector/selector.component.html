@@ -3,11 +3,11 @@
     id="lol"
     name="lol"
     class="form-select"
-    [(ngModel)]="chosenItem"
-    (change)="itemChanged($event)"
+    [(ngModel)]="chosenOption"
+    (change)="optionChanged($event)"
   >
-    <option *ngFor="let item of metalWeapons">
-      {{ item }}
+    <option *ngFor="let option of options">
+      {{ option }}
     </option></select
   ><label for="lol" class="form-label">Item</label>
 </div>
