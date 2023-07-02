@@ -1,7 +1,6 @@
 <div class="form-floating">
   <select
-    id="lol"
-    name="lol"
+    name="selector"
     class="form-select"
     [(ngModel)]="chosenOption"
     (change)="optionChanged($event)"
@@ -9,5 +8,5 @@
     <option *ngFor="let option of options">
       {{ option }}
     </option></select
-  ><label for="lol" class="form-label">Item</label>
+  ><label for="selector" class="form-label">Item</label>
 </div>

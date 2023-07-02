@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-selector',
@@ -7,6 +14,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SelectorComponent implements OnInit {
   @Input() options: string[];
+  @Input() optionFromParent: string;
   @Output() selectedItem: EventEmitter<string> = new EventEmitter();
   constructor() {}
 
@@ -14,8 +22,15 @@ export class SelectorComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['optionFromParent']) {
+      const newSelectedOption = changes['optionFromParent'].currentValue;
+      this.chosenOption = newSelectedOption;
+    }
+  }
+
   optionChanged(event: any): void {
-    // console.log('event.target.value: ', event.target.value);
+    this.chosenOption = event.target.value;
     this.selectedItem.emit(event.target.value);
   }
 }
