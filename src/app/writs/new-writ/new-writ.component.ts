@@ -18,13 +18,14 @@ import {
 } from 'constants/items/clothing';
 import { WOOD_ITEMS_ARR, wood_items_arr } from 'constants/items/woodworking';
 import { STYLES, styles } from 'constants/styles/styles';
-import { WEAPON_TRAITS_ARR, weapon_traits } from 'constants/traits/trait_items';
+import { WEAPON_TRAITS_ARR } from 'constants/traits/trait_items';
 import {
   ARMOR_TRAITS,
   JEWELERY_TRAITS,
   armor_traits,
   jewelery_traits,
   all_traits_list,
+  weapon_traits,
 } from 'constants/traits/traits';
 import { QUALITY, WRIT_TYPE, writ, writ_type_options } from 'constants/writs';
 import { isNil } from 'lodash';

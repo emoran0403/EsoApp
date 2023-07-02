@@ -16,7 +16,7 @@ export class UnlockButtonComponent implements OnInit {
   @Input() name: string; // Display for the header
   @Input() positive: string; // Display for the affirmative option
   @Input() negative: string; // Display for the negative option
-  @Input() outsideOption: string; // Input for outside control
+  @Input() optionFromParent: string; // Input for outside control
   @Output() optionSelected: EventEmitter<[string, boolean]> =
     new EventEmitter();
   constructor() {}
@@ -33,7 +33,7 @@ export class UnlockButtonComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['outsideOption']) {
-      this.chosenOption = this.outsideOption;
+      this.chosenOption = this.optionFromParent;
       console.log('this.selectedOption: ', this.chosenOption);
     }
   }

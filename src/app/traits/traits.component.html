@@ -71,7 +71,7 @@
 <!-- Items and Traits -->
 <div class="container">
   <!-- Chosen Item -->
-  <div class="row" *ngIf="shownItems">
+  <div class="row">
     <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
       <div class="my-3" id="wow">
         <app-selector
@@ -85,9 +85,8 @@
     </div>
   </div>
   <!-- Traits -->
-  <div class="row">
+  <div class="row" *ngIf="chosenItem">
     <unlock-button
-      *ngIf="shownTraits"
       [name]="'Toggle All'"
       [positive]="'Learned'"
       [negative]="'Locked'"
@@ -99,7 +98,7 @@
       [name]="trait"
       [positive]="'Learned'"
       [negative]="'Locked'"
-      [outsideOption]=""
+      [optionFromParent]=""
       (optionSelected)="onOptionSelected($event)"
     ></unlock-button>
   </div>

@@ -1,3 +1,5 @@
+import { weapon_traits } from './traits';
+
 export type weapon_trait_items =
   | 'Chysolite'
   | 'Amethyst'
@@ -142,17 +144,6 @@ export const TRAIT_ITEMS: trait_items = {
   ARMOR: ARMOR_TRAIT_ITEMS,
   JEWELERY: JEWELERY_TRAIT_ITEMS,
 };
-
-export type weapon_traits =
-  | 'Powered'
-  | 'Charged'
-  | 'Precise'
-  | 'Infused'
-  | 'Defending'
-  | 'Training'
-  | 'Sharpened'
-  | 'Decisive'
-  | 'Nirnhoned';
 
 export const WEAPON_TRAITS_ARR: weapon_traits[] = [
   'Powered',

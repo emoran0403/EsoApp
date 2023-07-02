@@ -20,12 +20,19 @@ export class SelectorComponent implements OnInit {
 
   chosenOption: string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('options: ', this.options);
+    console.log('chosenOption: ', this.chosenOption);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['optionFromParent']) {
-      const newSelectedOption = changes['optionFromParent'].currentValue;
-      this.chosenOption = newSelectedOption;
+      this.chosenOption = changes['optionFromParent'].currentValue;
+      console.log('optionFromParent changed');
+    }
+    if (changes['options']) {
+      this.chosenOption = null;
+      console.log('options changed');
     }
   }
 
