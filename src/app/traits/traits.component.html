@@ -5,8 +5,18 @@
       <div class="card-body">
         <h5 class="card-title text-center">Blacksmithing</h5>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-primary btn-sm mx-2">Weapons</button>
-          <button class="btn btn-primary btn-sm mx-2">Armor</button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            (click)="setShownTraits('weapons')"
+          >
+            Weapons
+          </button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            (click)="setShownTraits('armor')"
+          >
+            Armor
+          </button>
         </div>
       </div>
     </div>
@@ -14,7 +24,12 @@
       <div class="card-body">
         <h5 class="card-title text-center">Clothing</h5>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-primary btn-sm mx-2">Clothing</button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            (click)="setShownTraits('armor')"
+          >
+            Clothing
+          </button>
         </div>
       </div>
     </div>
@@ -22,8 +37,18 @@
       <div class="card-body">
         <h5 class="card-title text-center">Woodworking</h5>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-primary btn-sm mx-2">Weapons</button>
-          <button class="btn btn-primary btn-sm mx-2">Armor</button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            (click)="setShownTraits('weapons')"
+          >
+            Weapons
+          </button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            (click)="setShownTraits('armor')"
+          >
+            Armor
+          </button>
         </div>
       </div>
     </div>
@@ -31,7 +56,12 @@
       <div class="card-body">
         <h5 class="card-title text-center">Jewelery</h5>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-primary btn-sm mx-2">Jewelery</button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            (click)="setShownTraits('jewelery')"
+          >
+            Jewelery
+          </button>
         </div>
       </div>
     </div>
@@ -65,19 +95,20 @@
   <!-- Traits -->
   <div class="row">
     <unlock-button
+      *ngIf="shownTraits"
       [name]="'Toggle All'"
       [positive]="'Learned'"
       [negative]="'Locked'"
-      (optionSelected)="onoptionSelected($event)"
+      (optionSelected)="onOptionSelected($event)"
     ></unlock-button>
     <unlock-button
-      *ngFor="let trait of weaponTraits; let i = index"
+      *ngFor="let trait of shownTraits; let i = index"
       [id]="'${trait}-${i}'"
       [name]="trait"
       [positive]="'Learned'"
       [negative]="'Locked'"
       [outsideOption]=""
-      (optionSelected)="onoptionSelected($event)"
+      (optionSelected)="onOptionSelected($event)"
     ></unlock-button>
   </div>
 </div>
