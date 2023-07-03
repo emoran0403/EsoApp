@@ -33,7 +33,7 @@ export class UnlockButtonComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['outsideOption']) {
+    if (changes['optionFromParent']) {
       this.chosenOption = this.optionFromParent;
       console.log('this.selectedOption: ', this.chosenOption);
     }
