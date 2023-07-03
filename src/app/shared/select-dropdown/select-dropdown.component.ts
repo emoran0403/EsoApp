@@ -17,7 +17,7 @@ export class SelectDropdownComponent implements OnInit {
   ngOnInit(): void {}
 
   optionClicked(option: string): void {
-    console.log('option: ', option);
+    // console.log('option: ', option);
     this.selectedOption.emit(option);
   }
 }

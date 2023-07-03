@@ -48,7 +48,7 @@
       [name]="'Toggle All'"
       [positive]="'Learned'"
       [negative]="'Locked'"
-      (optionSelected)="onOptionSelected($event)"
+      (optionSelected)="onAllTraitToggle($event)"
     ></unlock-button>
     <unlock-button
       *ngFor="let trait of shownTraits; let i = index"
@@ -57,7 +57,7 @@
       [positive]="'Learned'"
       [negative]="'Locked'"
       [optionFromParent]=""
-      (optionSelected)="onOptionSelected($event)"
+      (optionSelected)="onSingleTraitToggle($event)"
     ></unlock-button>
   </div>
 </div>

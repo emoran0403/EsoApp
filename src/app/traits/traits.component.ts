@@ -58,13 +58,20 @@ export class TraitsComponent implements OnInit {
     // }, 2000);
   }
 
-  onOptionSelected(wow: any): void {
-    console.log('wow: ', wow);
+  onAllTraitToggle(trait: any): void {
+    console.log('trait: ', trait);
+  }
+
+  onSingleTraitToggle(trait: any): void {
+    console.log('trait: ', trait);
   }
 
   handleCraftingTypeChange(type: any): void {
+    console.log('crafting type chosen: ', type);
     this.chosenCraftingType = type;
     this.disableItems = false;
+    this.chosenItem = undefined; // This resets chosen item and effectively hides the traits
+
     switch (type) {
       case 'Blacksmithing - Weapons':
         this.shownItems = this.metalWeapons;
@@ -94,7 +101,7 @@ export class TraitsComponent implements OnInit {
   }
 
   handleSelectedItemChange(item: any): void {
-    console.log('eventwow lol: ', item);
+    console.log('item chosen: ', item);
     this.chosenItem = item;
   }
 
