@@ -8,7 +8,7 @@ export type metal_weapons =
   | 'Dagger';
 
 export type metal_apparel =
-  | 'Curaiss'
+  | 'Cuirass'
   | 'Sabatons'
   | 'Gauntlets'
   | 'Helm'
@@ -26,7 +26,7 @@ export const METAL_WEAPONS: metal_weapons[] = [
   'Dagger',
 ];
 export const METAL_APPAREL: metal_apparel[] = [
-  'Curaiss',
+  'Cuirass',
   'Sabatons',
   'Gauntlets',
   'Helm',
