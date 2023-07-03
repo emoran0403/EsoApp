@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { chain, size, groupBy, forEach } from 'lodash';
+import { chain, size, forEach } from 'lodash';
+import { any_trait, item } from '../shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class DataService {
    * @param rawData DB response for the all traits query
    * @returns An object describing the number of traits on each item
    */
-  formatTraits(rawData: any[]): any {
+  formatTraits(rawData: any[]): item[] {
     const [rawCopy] = rawData;
     delete rawCopy.player_uuid;
 
@@ -57,6 +58,18 @@ export class DataService {
 
     console.log('reducedArr: ', reducedItems);
 
-    return reducedItems;
+    return reducedItems as item[];
+  }
+
+  lowercaseNoSpace(array: string[]): string[] {
+    return array.map((str) => str.toLowerCase().replace(/\s/g, ''));
+  }
+
+  makeTupleArray(obj: Record<string, any>): [string, boolean][] {
+    return Object.entries(obj);
+  }
+
+  capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }
