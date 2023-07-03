@@ -15,8 +15,11 @@ import { WritCardComponent } from './writs/writ-card/writ-card.component';
 import { TraitsComponent } from './traits/traits.component';
 import { StylesComponent } from './styles/styles.component';
 import { UnlockButtonComponent } from './shared/unlock-button/unlock-button.component';
-import { SelectorComponent } from './shared/selector/selector.component';
 import { SelectDropdownComponent } from './shared/select-dropdown/select-dropdown.component';
+
+import { CommonModule } from '@angular/common';
+
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
 const SHARED_COMPONENTS = [UnlockButtonComponent];
@@ -34,20 +37,21 @@ const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
 @NgModule({
   declarations: [
     AppComponent,
+    SelectDropdownComponent,
+    UnlockButtonComponent,
     ...PARENT_MODULES,
     ...CHILDREN_COMPONENTS,
     ...SHARED_COMPONENTS,
-    UnlockButtonComponent,
-    SelectorComponent,
-    SelectDropdownComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    BrowserModule,
+    BsDropdownModule,
+    CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

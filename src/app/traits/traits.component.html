@@ -1,67 +1,19 @@
-<!-- Buttons -->
+<!-- Crafting Type -->
 <div class="container">
   <div class="row">
     <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Blacksmithing</h5>
-        <div class="d-flex justify-content-center">
-          <button
-            class="btn btn-primary btn-sm mx-2"
-            (click)="setTraitsAndItems('weapons', 'blacksmithing')"
-          >
-            Weapons
-          </button>
-          <button
-            class="btn btn-primary btn-sm mx-2"
-            (click)="setTraitsAndItems('armor', 'blacksmithing')"
-          >
-            Armor
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Woodworking</h5>
-        <div class="d-flex justify-content-center">
-          <button
-            class="btn btn-primary btn-sm mx-2"
-            (click)="setTraitsAndItems('weapons', 'woodworking')"
-          >
-            Weapons
-          </button>
-          <button
-            class="btn btn-primary btn-sm mx-2"
-            (click)="setTraitsAndItems('armor', 'woodworking')"
-          >
-            Armor
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Clothing</h5>
-        <div class="d-flex justify-content-center">
-          <button
-            class="btn btn-primary btn-sm mx-2"
-            (click)="setTraitsAndItems('armor', 'clothing')"
-          >
-            Clothing
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-      <div class="card-body">
-        <h5 class="card-title text-center">Jewelery</h5>
-        <div class="d-flex justify-content-center">
-          <button
-            class="btn btn-primary btn-sm mx-2"
-            (click)="setTraitsAndItems('jewelery', 'jewelery')"
-          >
-            Jewelery
-          </button>
+      <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+        <select-dropdown
+          class="col-3"
+          [buttonText]="'Crafting'"
+          [options]="craftingTypes"
+          (selectedOption)="handleCraftingTypeChange($event)"
+        >
+        </select-dropdown>
+        <div class="col-9">
+          <h5 *ngIf="chosenCraftingType" class="card-title text-center">
+            {{ chosenCraftingType }}
+          </h5>
         </div>
       </div>
     </div>
@@ -73,14 +25,20 @@
   <!-- Chosen Item -->
   <div class="row">
     <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-      <div class="my-3" id="wow">
-        <app-selector
+      <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+        <select-dropdown
+          class="col-3"
+          [buttonText]="'Item'"
           [options]="shownItems"
-          (selectedItem)="handleSelectedItemChange($event)"
-        ></app-selector>
-      </div>
-      <div class="card-body" *ngIf="chosenItem">
-        <h5 class="card-title text-center">{{ chosenItem }}</h5>
+          [disableFromParent]="disableItems"
+          (selectedOption)="handleSelectedItemChange($event)"
+        >
+        </select-dropdown>
+        <div class="col-9">
+          <h5 *ngIf="chosenItem" class="card-title text-center">
+            {{ chosenItem }}
+          </h5>
+        </div>
       </div>
     </div>
   </div>
@@ -103,3 +61,5 @@
     ></unlock-button>
   </div>
 </div>
+
+<!-- wow -->

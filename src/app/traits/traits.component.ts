@@ -4,16 +4,12 @@ import { CLOTHING_ITEMS_ARR } from 'constants/items/clothing';
 import { WOOD_APPAREL, WOOD_WEAPONS } from 'constants/items/woodworking';
 import {
   ARMOR_TRAITS,
-  All_TRAITS,
   JEWELERY_TRAITS,
   WEAPON_TRAITS,
-  armor_traits,
-  jewelery_traits,
-  weapon_traits,
 } from 'constants/traits/traits';
 import { TraitsService } from '../services/traits.service';
 import { JEWELERY_ITEMS_ARR } from 'constants/items';
-import { item_class, skill } from '../shared/models';
+import { all_trait_options } from '../shared/models';
 
 @Component({
   selector: 'app-traits',
@@ -26,13 +22,6 @@ export class TraitsComponent implements OnInit {
   readonly weaponTraits = WEAPON_TRAITS;
   readonly armorTraits = ARMOR_TRAITS;
   readonly jeweleryTraits = JEWELERY_TRAITS;
-  // readonly TRAITS = {
-  //   weapon: this.weaponTraits,
-  //   armor: this.armorTraits,
-  //   jewelery: this.jeweleryTraits,
-  // };
-
-  readonly traitOptions = All_TRAITS;
 
   readonly metalWeapons = METAL_WEAPONS;
   readonly metalArmor = METAL_APPAREL;
@@ -41,11 +30,24 @@ export class TraitsComponent implements OnInit {
   readonly woodArmor = WOOD_APPAREL;
   readonly jeweleryItems = JEWELERY_ITEMS_ARR;
 
-  shownTraits: weapon_traits[] | armor_traits[] | jewelery_traits[];
-  shownItems;
-  chosenItem;
+  chosenCraftingType: string; // Crafting type which determines the items to show
+  shownItems; // The array of items to display and set traits on
+  chosenItem; // Item the user has chosen to toggle traits on
+  shownTraits: all_trait_options; // The traits that are shown based on chosenCraftingType
+  playerTraits; // Used to hold all traits from DB
 
-  playerTraits;
+  craftingTypes: string[] = [
+    'Blacksmithing - Weapons',
+    'Blacksmithing - Armor',
+    'Woodworking - Weapons',
+    'Woodworking - Armor',
+    'Clothing',
+    'Jewelery',
+  ];
+
+  // Display Booleans
+  disableItems: boolean = true; // controls the disabling of the items dropdown
+
   ngOnInit(): void {
     this.traits.getAllTraits().subscribe((data) => {
       this.playerTraits = data;
@@ -59,6 +61,38 @@ export class TraitsComponent implements OnInit {
   onOptionSelected(wow: any): void {
     console.log('wow: ', wow);
   }
+
+  handleCraftingTypeChange(type: any): void {
+    this.chosenCraftingType = type;
+    this.disableItems = false;
+    switch (type) {
+      case 'Blacksmithing - Weapons':
+        this.shownItems = this.metalWeapons;
+        this.shownTraits = this.weaponTraits;
+        break;
+      case 'Blacksmithing - Armor':
+        this.shownItems = this.metalArmor;
+        this.shownTraits = this.armorTraits;
+        break;
+      case 'Woodworking - Weapons':
+        this.shownItems = this.woodWeapons;
+        this.shownTraits = this.weaponTraits;
+        break;
+      case 'Woodworking - Armor':
+        this.shownItems = this.woodArmor;
+        this.shownTraits = this.armorTraits;
+        break;
+      case 'Clothing':
+        this.shownItems = this.clothingArmor;
+        this.shownTraits = this.armorTraits;
+        break;
+      case 'Jewelery':
+        this.shownItems = this.jeweleryItems;
+        this.shownTraits = this.jeweleryTraits;
+        break;
+    }
+  }
+
   handleSelectedItemChange(item: any): void {
     console.log('eventwow lol: ', item);
     this.chosenItem = item;
@@ -73,33 +107,5 @@ export class TraitsComponent implements OnInit {
   resetChosenItemsAndTraits(): void {
     this.resetChosenItems();
     this.resetChosenTraits();
-  }
-
-  setTraitsAndItems(item: item_class, skill: skill): void {
-    this.resetChosenItemsAndTraits();
-    this.shownTraits = this.traitOptions[item.toLocaleUpperCase()];
-
-    switch (skill) {
-      case 'jewelery':
-        this.shownItems = this.jeweleryItems;
-        break;
-      case 'clothing':
-        this.shownItems = this.clothingArmor;
-        break;
-      case 'blacksmithing':
-        if (item === 'armor') {
-          this.shownItems = this.metalArmor;
-        } else {
-          this.shownItems = this.metalWeapons;
-        }
-        break;
-      case 'woodworking':
-        if (item === 'armor') {
-          this.shownItems = this.woodArmor;
-        } else {
-          this.shownItems = this.woodWeapons;
-        }
-        break;
-    }
   }
 }

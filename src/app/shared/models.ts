@@ -1,6 +1,11 @@
 export type skill = 'blacksmithing' | 'clothing' | 'woodworking' | 'jewelery';
 export type item_class = 'armor' | 'weapons' | 'jewelery';
-export type all_traits = weapon_traits[] | armor_traits[] | jewelery_traits[];
+export type all_trait_options =
+  | weapon_traits[]
+  | armor_traits[]
+  | jewelery_traits[];
+
+export type any_trait = weapon_traits | armor_traits | jewelery_traits;
 
 export type weapon_traits =
   | 'Powered'
