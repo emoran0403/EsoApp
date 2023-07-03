@@ -6,6 +6,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'unlock-button',
@@ -16,10 +17,10 @@ export class UnlockButtonComponent implements OnInit {
   @Input() name: string; // Display for the header
   @Input() positive: string; // Display for the affirmative option
   @Input() negative: string; // Display for the negative option
-  @Input() optionFromParent: string; // Input for outside control
+  @Input() optionFromParent: string | boolean; // Input for outside control
   @Output() optionSelected: EventEmitter<[string, boolean]> =
     new EventEmitter();
-  constructor() {}
+  constructor(private readonly data: DataService) {}
 
   chosenOption: boolean | string = false; // Set the default value
 
@@ -35,6 +36,9 @@ export class UnlockButtonComponent implements OnInit {
     if (changes['outsideOption']) {
       this.chosenOption = this.optionFromParent;
       console.log('this.selectedOption: ', this.chosenOption);
+    }
+    if (changes['name']) {
+      this.name = this.data.capitalizeFirstLetter(changes['name'].currentValue);
     }
   }
 }
