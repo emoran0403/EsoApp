@@ -9,7 +9,8 @@ import {
 } from 'constants/traits/traits';
 import { TraitsService } from '../services/traits.service';
 import { JEWELERY_ITEMS_ARR } from 'constants/items';
-import { all_trait_options } from '../shared/models';
+import { all_items_list, all_trait_options, item } from '../shared/models';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-traits',
@@ -17,7 +18,10 @@ import { all_trait_options } from '../shared/models';
   styleUrls: ['./traits.component.scss'],
 })
 export class TraitsComponent implements OnInit {
-  constructor(private readonly traits: TraitsService) {}
+  constructor(
+    private readonly traits: TraitsService,
+    private readonly data: DataService
+  ) {}
 
   readonly weaponTraits = WEAPON_TRAITS;
   readonly armorTraits = ARMOR_TRAITS;
@@ -32,9 +36,12 @@ export class TraitsComponent implements OnInit {
 
   chosenCraftingType: string; // Crafting type which determines the items to show
   shownItems; // The array of items to display and set traits on
-  chosenItem; // Item the user has chosen to toggle traits on
+  chosenItem: all_items_list; // Item the user has chosen to toggle traits on
   shownTraits: all_trait_options; // The traits that are shown based on chosenCraftingType
-  playerTraits; // Used to hold all traits from DB
+  itemForButtons: [string, boolean][]; // chosenItem with the items traits on it
+
+  playerTraits: item[]; // Used to hold all traits from DB
+  filteredTraits: item[]; // playerTraits after filtering to match items in shownItems
 
   craftingTypes: string[] = [
     'Blacksmithing - Weapons',
@@ -51,6 +58,7 @@ export class TraitsComponent implements OnInit {
   ngOnInit(): void {
     this.traits.getAllTraits().subscribe((data) => {
       this.playerTraits = data;
+      console.log('this.playerTraits: ', this.playerTraits);
     });
 
     // setTimeout(() => {
@@ -98,21 +106,52 @@ export class TraitsComponent implements OnInit {
         this.shownTraits = this.jeweleryTraits;
         break;
     }
+
+    this.filterTraits();
   }
 
-  handleSelectedItemChange(item: any): void {
+  handleSelectedItemChange(item: string): void {
     console.log('item chosen: ', item);
-    this.chosenItem = item;
+    this.chosenItem = item as all_items_list;
+    this.filterForButtons();
   }
 
-  resetChosenItems(): void {
-    this.chosenItem = null;
+  filterTraits(): void {
+    const lowercaseItems = this.data.lowercaseNoSpace(this.shownItems);
+
+    // console.log('shownItems: ', lowercaseItems);
+
+    const filteredTraits = this.playerTraits.filter((obj) =>
+      lowercaseItems.includes(obj.item)
+    );
+
+    this.filteredTraits = [...filteredTraits];
+
+    console.log('filtered traits: ', this.filteredTraits);
+    console.log('chosenItem: ', this.chosenItem);
   }
-  resetChosenTraits(): void {
-    this.shownTraits = null;
-  }
-  resetChosenItemsAndTraits(): void {
-    this.resetChosenItems();
-    this.resetChosenTraits();
+
+  filterForButtons(): void {
+    const filteredTraitItem = this.filteredTraits.filter((item: item) => {
+      return item.item === this.chosenItem.toLocaleLowerCase();
+    });
+
+    // this.itemForButtons = filteredTraitItem[0];
+
+    this.itemForButtons = this.data.makeTupleArray(filteredTraitItem[0]);
+
+    console.log('filteredTraitItem: ', filteredTraitItem);
+    console.log('this.itemForButtons: ', this.itemForButtons);
   }
 }
+
+/**
+ * DONE - make service call to get all traits
+ * when the item is chosen - populate the trait buttons with db value
+ * if toggle all is called - populate the trait buttons with value from toggle all button
+ * what to do if first time user?
+ *  - first time user should have falses everywhere
+ *
+ *
+ *
+ */

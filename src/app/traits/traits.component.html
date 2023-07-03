@@ -50,16 +50,15 @@
       [negative]="'Locked'"
       (optionSelected)="onAllTraitToggle($event)"
     ></unlock-button>
-    <unlock-button
-      *ngFor="let trait of shownTraits; let i = index"
-      [id]="'${trait}-${i}'"
-      [name]="trait"
-      [positive]="'Learned'"
-      [negative]="'Locked'"
-      [optionFromParent]=""
-      (optionSelected)="onSingleTraitToggle($event)"
-    ></unlock-button>
+    <ng-container *ngFor="let tuple of itemForButtons.slice(1); let i = index">
+      <unlock-button
+        [id]="'${tuple[0]}-${i}'"
+        [name]="tuple[0]"
+        [positive]="'Learned'"
+        [negative]="'Locked'"
+        [optionFromParent]="tuple[1]"
+        (optionSelected)="onSingleTraitToggle($event)"
+      ></unlock-button>
+    </ng-container>
   </div>
 </div>
-
-<!-- wow -->
