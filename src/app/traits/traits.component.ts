@@ -40,8 +40,8 @@ export class TraitsComponent implements OnInit {
   shownTraits: all_trait_options; // The traits that are shown based on chosenCraftingType
   itemForButtons: [string, boolean][]; // chosenItem with the items traits on it
 
-  playerTraits: item[]; // Used to hold all traits from DB
-  filteredTraits: item[]; // playerTraits after filtering to match items in shownItems
+  playerTraitItems: item[]; // Used to hold all traits from DB
+  filteredTraitItems: item[]; // playerTraits after filtering to match items in shownItems
 
   craftingTypes: string[] = [
     'Blacksmithing - Weapons',
@@ -57,8 +57,8 @@ export class TraitsComponent implements OnInit {
 
   ngOnInit(): void {
     this.traits.getAllTraits().subscribe((data) => {
-      this.playerTraits = data;
-      console.log('this.playerTraits: ', this.playerTraits);
+      this.playerTraitItems = data;
+      console.log('this.playerTraits: ', this.playerTraitItems);
     });
 
     // setTimeout(() => {
@@ -67,15 +67,61 @@ export class TraitsComponent implements OnInit {
   }
 
   onAllTraitToggle(trait: any): void {
-    console.log('trait: ', trait);
+    // console.log('All trait: ', trait);
   }
 
-  onSingleTraitToggle(trait: any): void {
-    console.log('trait: ', trait);
+  /**
+   * Makes service call to set trait status in DB
+   * Updates playerTraitItems to reflect the new trait status
+   *
+   * @param item Tuple array containing the trait, and the new status of the trait
+   */
+  onSingleTraitToggle(item: [string, boolean]): void {
+    const [trait, value] = item;
+
+    // Convert trait to lowercase
+    const lowercasedTrait = trait.toLowerCase();
+
+    // Service call
+    this.traits
+      .updateOneTrait(this.chosenItem, trait, value)
+      .subscribe((res) => {
+        console.log('Service call response: ', res);
+
+        // Find the index of the item in playerTraitItems
+        const index = this.playerTraitItems.findIndex(
+          (item) => item.item.toLowerCase() === this.chosenItem.toLowerCase()
+        );
+
+        console.log('Item index: ', index);
+
+        if (index !== -1) {
+          // Create a copy of the item with the updated trait value
+          const updatedItem = {
+            ...this.playerTraitItems[index],
+            [lowercasedTrait]: value,
+          };
+
+          console.log('Updated item: ', updatedItem);
+
+          // Update the playerTraitItems array in place
+          this.playerTraitItems[index] = updatedItem;
+          console.log(
+            'UPDATED - this.playerTraitItems: ',
+            this.playerTraitItems
+          );
+        }
+
+        this.filterTraitItems();
+      });
   }
 
+  /**
+   * Sets which kind of items are chosen
+   * @param type
+   */
   handleCraftingTypeChange(type: any): void {
-    console.log('crafting type chosen: ', type);
+    // console.log('crafting type chosen: ', type);
     this.chosenCraftingType = type;
     this.disableItems = false;
     this.chosenItem = undefined; // This resets chosen item and effectively hides the traits
@@ -107,41 +153,49 @@ export class TraitsComponent implements OnInit {
         break;
     }
 
-    this.filterTraits();
+    this.filterTraitItems();
   }
 
+  /**
+   * Sets the item that was chosen
+   * @param item
+   */
   handleSelectedItemChange(item: string): void {
-    console.log('item chosen: ', item);
+    // console.log('item chosen: ', item);
     this.chosenItem = item as all_items_list;
     this.filterForButtons();
   }
 
-  filterTraits(): void {
+  /**
+   * Filters down all items to just those that should be shown based on crafting type
+   */
+  filterTraitItems(): void {
     const lowercaseItems = this.data.lowercaseNoSpace(this.shownItems);
 
-    // console.log('shownItems: ', lowercaseItems);
+    console.log('shownItems: ', lowercaseItems);
 
-    const filteredTraits = this.playerTraits.filter((obj) =>
+    const filteredTraits = this.playerTraitItems.filter((obj) =>
       lowercaseItems.includes(obj.item)
     );
 
-    this.filteredTraits = [...filteredTraits];
+    this.filteredTraitItems = [...filteredTraits];
 
-    console.log('filtered traits: ', this.filteredTraits);
+    console.log('filtered traits: ', this.filteredTraitItems);
     console.log('chosenItem: ', this.chosenItem);
   }
 
+  /**
+   * Filters down the filteredTraitItems to a single item that was chosen, and prepares it for unlock buttons
+   */
   filterForButtons(): void {
-    const filteredTraitItem = this.filteredTraits.filter((item: item) => {
+    const filteredTraitItem = this.filteredTraitItems.filter((item: item) => {
       return item.item === this.chosenItem.toLocaleLowerCase();
     });
 
-    // this.itemForButtons = filteredTraitItem[0];
-
     this.itemForButtons = this.data.makeTupleArray(filteredTraitItem[0]);
 
-    console.log('filteredTraitItem: ', filteredTraitItem);
-    console.log('this.itemForButtons: ', this.itemForButtons);
+    // console.log('filteredTraitItem: ', filteredTraitItem);
+    // console.log('this.itemForButtons: ', this.itemForButtons);
   }
 }
 

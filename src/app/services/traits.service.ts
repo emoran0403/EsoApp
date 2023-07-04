@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { DataService } from './data.service';
 import { map } from 'rxjs';
+import { URLS } from './constants';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +15,37 @@ export class TraitsService {
   ) {}
 
   getAllTraits(): Observable<any> {
-    const url = 'http://localhost:3000/dev/esoapp/traits/all';
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       player_uuid: '100',
     });
 
-    return this.http.get(url, { headers }).pipe(
+    return this.http.get(URLS.traits.getAll, { headers }).pipe(
       map((res: any) => {
         return this.data.formatTraits(res);
       })
     );
+  }
+
+  updateOneTrait(
+    item: string,
+    trait: string,
+    completion: boolean
+  ): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      player_uuid: '100',
+    });
+    const body = {
+      player_uuid: '100',
+      item,
+      trait,
+      completion,
+    };
+
+    const stringifiedBody = JSON.stringify(body);
+    // console.log('raw body from service: ', body);
+    // console.log('stringifiedBody from service: ', stringifiedBody);
+    return this.http.put(URLS.traits.updateOne, stringifiedBody, { headers });
   }
 }

@@ -29,13 +29,13 @@ export class UnlockButtonComponent implements OnInit {
   choose(choice: boolean): void {
     this.chosenOption = choice;
     this.optionSelected.emit([this.name, choice]);
-    console.log('choice: ', choice);
+    // console.log('choice: ', choice);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['optionFromParent']) {
       this.chosenOption = this.optionFromParent;
-      console.log('this.selectedOption: ', this.chosenOption);
+      // console.log('this.selectedOption: ', this.chosenOption);
     }
     if (changes['name']) {
       this.name = this.data.capitalizeFirstLetter(changes['name'].currentValue);

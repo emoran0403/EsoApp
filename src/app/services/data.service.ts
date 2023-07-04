@@ -56,7 +56,7 @@ export class DataService {
       })
       .value();
 
-    console.log('reducedArr: ', reducedItems);
+    // console.log('reducedArr: ', reducedItems);
 
     return reducedItems as item[];
   }
