@@ -222,4 +222,18 @@ export class NewWritComponent implements OnInit {
   ngOnInit() {
     return;
   }
+
+  showWritType: boolean = false;
+  handleOptionTypeChange(type: any): void {
+    console.log('writ type: ', type);
+    this.writType = type;
+    this.showWritType = true;
+  }
+
+  showQuality: boolean = false;
+  handleQualityChange(quality: any): void {
+    console.log('quality: ', quality);
+    this.quality = quality;
+    this.showQuality = true;
+  }
 }

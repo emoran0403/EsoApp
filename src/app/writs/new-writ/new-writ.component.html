@@ -3,10 +3,55 @@
   style, item, trait form fields should be displayed and disabled
   until releveant previous choice has been selected
   -->
+
+  <!-- Writ Type -->
+  <div class="container">
+    <div class="row">
+      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+        <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+          <select-dropdown
+            class="col-3"
+            [buttonText]="'Writ Type'"
+            [options]="writTypeOptions"
+            (selectedOption)="handleOptionTypeChange($event)"
+          >
+          </select-dropdown>
+          <div class="col-9">
+            <h5 *ngIf="showWritType" class="card-title text-center">
+              {{ writType }}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quality -->
+  <div class="container">
+    <div class="row">
+      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+        <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+          <select-dropdown
+            class="col-3"
+            [buttonText]="'Quality'"
+            [options]="qualities"
+            (selectedOption)="handleQualityChange($event)"
+          >
+          </select-dropdown>
+          <div class="col-9">
+            <h5 *ngIf="showQuality" class="card-title text-center">
+              {{ quality }}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container-fluid">
     <div class="row">
       <!-- Writ Type -->
-      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+      <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
         <div class="form-floating">
           <select
             id="writType"
@@ -21,9 +66,9 @@
           </select>
           <label for="writType" class="form-label">Writ Type</label>
         </div>
-      </div>
+      </div> -->
       <!-- Quality  -->
-      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+      <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
         <div class="form-floating">
           <select
             id="quality"
@@ -38,7 +83,7 @@
           </select>
           <label for="quality" class="form-label">Quality</label>
         </div>
-      </div>
+      </div> -->
       <!-- Set -->
       <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3" id="armorSet">
         <div class="form-floating">

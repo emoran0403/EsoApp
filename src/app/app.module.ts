@@ -20,6 +20,7 @@ import { SelectDropdownComponent } from './shared/select-dropdown/select-dropdow
 import { CommonModule } from '@angular/common';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TypeAheadComponent } from './shared/type-ahead/type-ahead.component';
 
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
 const SHARED_COMPONENTS = [UnlockButtonComponent];
@@ -42,6 +43,7 @@ const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
     ...PARENT_MODULES,
     ...CHILDREN_COMPONENTS,
     ...SHARED_COMPONENTS,
+    TypeAheadComponent,
   ],
   imports: [
     AppRoutingModule,
