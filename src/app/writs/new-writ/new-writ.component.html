@@ -13,6 +13,7 @@
             class="col-3"
             [buttonText]="'Writ Type'"
             [options]="writTypeOptions"
+            [disableFromParent]="false"
             (selectedOption)="handleOptionTypeChange($event)"
           >
           </select-dropdown>
@@ -35,6 +36,7 @@
             class="col-3"
             [buttonText]="'Quality'"
             [options]="qualities"
+            [disableFromParent]="false"
             (selectedOption)="handleQualityChange($event)"
           >
           </select-dropdown>

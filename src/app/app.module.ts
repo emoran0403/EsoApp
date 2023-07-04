@@ -17,7 +17,7 @@ import { TraitsComponent } from './traits/traits.component';
 
 import { StylesComponent } from './styles/styles.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { UnlockButtonComponent } from './shared/unlock-button/unlock-button.component';
 import { SelectDropdownComponent } from './shared/select-dropdown/select-dropdown.component';
@@ -55,6 +55,7 @@ const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
+    NgbDropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
