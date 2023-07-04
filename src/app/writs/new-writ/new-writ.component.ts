@@ -63,7 +63,7 @@ export class NewWritComponent implements OnInit {
   showWeaponTraits: boolean = false;
   showArmorTraits: boolean = false;
   showJeweleryTraits: boolean = false;
-  showStyle: boolean = false;
+  showStyle: boolean = true;
 
   writTypeChange(event: any): void {
     // console.log(event.target.value);
@@ -228,6 +228,28 @@ export class NewWritComponent implements OnInit {
     console.log('writ type: ', type);
     this.writType = type;
     this.showWritType = true;
+    this.showItem = false;
+
+    if (this.writType === 'Jewelery') {
+      this.showStyle = true;
+    } else {
+      this.showStyle = false;
+    }
+
+    switch (type) {
+      case 'Jewelery':
+        this.itemOptions = this.jeweleryItems;
+        break;
+      case 'Blacksmithing':
+        this.itemOptions = this.blacksmithingItems;
+        break;
+      case 'Woodworking':
+        this.itemOptions = this.woodItems;
+        break;
+      case 'Clothing':
+        this.itemOptions = this.clothingItems;
+        break;
+    }
   }
 
   showQuality: boolean = false;
@@ -235,5 +257,23 @@ export class NewWritComponent implements OnInit {
     console.log('quality: ', quality);
     this.quality = quality;
     this.showQuality = true;
+  }
+
+  showSet: boolean = false;
+  handleSetChange(set: string): void {
+    this.armorSet = set as armor_sets;
+    console.log('set change event: ', set);
+  }
+
+  handleStyleChange(style: string): void {
+    this.style = style as styles;
+    console.log('style change event: ', style);
+  }
+
+  itemOptions: string[];
+  showItem: boolean = true;
+  handleItemChange(item: any): void {
+    this.item = item;
+    console.log('item: ', item);
   }
 }

@@ -17,14 +17,24 @@ import { TraitsComponent } from './traits/traits.component';
 
 import { StylesComponent } from './styles/styles.component';
 
-import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModule,
+  NgbTypeaheadModule,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 import { UnlockButtonComponent } from './shared/unlock-button/unlock-button.component';
 import { SelectDropdownComponent } from './shared/select-dropdown/select-dropdown.component';
 import { TypeAheadComponent } from './shared/type-ahead/type-ahead.component';
 
+import { JsonPipe } from '@angular/common';
+
 //! I should be able to wrap these within their parent module, but not sure how to do that yet
-const SHARED_COMPONENTS = [UnlockButtonComponent];
+const SHARED_COMPONENTS = [
+  UnlockButtonComponent,
+  SelectDropdownComponent,
+  TypeAheadComponent,
+];
 
 const CHILDREN_COMPONENTS = [
   NewWritComponent,
@@ -36,12 +46,11 @@ const CHILDREN_COMPONENTS = [
 //* Parent modules
 const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
 
+const NG_BOOTSTRAP_MODULES = [NgbModule, NgbTypeaheadModule, NgbDropdownModule];
+
 @NgModule({
   declarations: [
     AppComponent,
-    SelectDropdownComponent,
-    UnlockButtonComponent,
-    TypeAheadComponent,
     ...PARENT_MODULES,
     ...CHILDREN_COMPONENTS,
     ...SHARED_COMPONENTS,
@@ -52,10 +61,10 @@ const PARENT_MODULES = [WritsComponent, TraitsComponent, StylesComponent];
     BrowserModule,
     CommonModule,
     FormsModule,
+    JsonPipe,
     HttpClientModule,
-    NgbModule,
     ReactiveFormsModule,
-    NgbDropdownModule,
+    ...NG_BOOTSTRAP_MODULES,
   ],
   providers: [],
   bootstrap: [AppComponent],

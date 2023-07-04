@@ -8,7 +8,10 @@
   <div class="container">
     <div class="row">
       <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+        <div
+          class="my-3 d-flex flex-row justify-content-around"
+          id="writTypeDropdown"
+        >
           <select-dropdown
             class="col-3"
             [buttonText]="'Writ Type'"
@@ -31,7 +34,10 @@
   <div class="container">
     <div class="row">
       <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+        <div
+          class="my-3 d-flex flex-row justify-content-around"
+          id="qualityTypeDropdown"
+        >
           <select-dropdown
             class="col-3"
             [buttonText]="'Quality'"
@@ -43,6 +49,73 @@
           <div class="col-9">
             <h5 *ngIf="showQuality" class="card-title text-center">
               {{ quality }}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Set -->
+  <type-ahead
+    [labeltext]="'Set'"
+    [options]="armorSets"
+    (optionSelected)="handleSetChange($event)"
+  ></type-ahead>
+
+  <!-- Style -->
+  <type-ahead
+    [labeltext]="'Style'"
+    [options]="styles"
+    [disableFromParent]="showStyle"
+    (optionSelected)="handleStyleChange($event)"
+  ></type-ahead>
+
+  <!-- Items -->
+  <div class="container">
+    <div class="row">
+      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+        <div
+          class="my-3 d-flex flex-row justify-content-around"
+          id="itemDropdown"
+        >
+          <select-dropdown
+            class="col-3"
+            [buttonText]="'Item'"
+            [options]="itemOptions"
+            [disableFromParent]="showItem"
+            (selectedOption)="handleItemChange($event)"
+          >
+          </select-dropdown>
+          <div class="col-9">
+            <h5 *ngIf="!showItem" class="card-title text-center">
+              {{ item }}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Traits  -->
+  <div class="container">
+    <div class="row">
+      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+        <div
+          class="my-3 d-flex flex-row justify-content-around"
+          id="itemDropdown"
+        >
+          <select-dropdown
+            class="col-3"
+            [buttonText]="'Trait'"
+            [options]="itemOptions"
+            [disableFromParent]="showItem"
+            (selectedOption)="handleItemChange($event)"
+          >
+          </select-dropdown>
+          <div class="col-9">
+            <h5 *ngIf="!showItem" class="card-title text-center">
+              {{ item }}
             </h5>
           </div>
         </div>
@@ -87,7 +160,7 @@
         </div>
       </div> -->
       <!-- Set -->
-      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3" id="armorSet">
+      <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3" id="armorSet">
         <div class="form-floating">
           <select
             id="set"
@@ -101,9 +174,9 @@
             </option></select
           ><label for="set" class="form-label">Set</label>
         </div>
-      </div>
+      </div> -->
       <!-- Style -->
-      <div
+      <!-- <div
         class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
         id="style"
         *ngIf="showStyle"
@@ -121,11 +194,11 @@
             </option></select
           ><label for="styles" class="form-label">Style</label>
         </div>
-      </div>
+      </div> -->
       <!-- Items -->
-      <div [ngSwitch]="writType">
-        <!-- Blacksmithing Items -->
-        <div
+      <!-- <div [ngSwitch]="writType"> -->
+      <!-- Blacksmithing Items -->
+      <!-- <div
           class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
           id="blacksmithingItems"
           *ngSwitchCase="'Blacksmithing'"
@@ -144,9 +217,9 @@
             </select>
             <label for="blacksmithing-item" class="form-label">Item</label>
           </div>
-        </div>
-        <!-- Clothing Items -->
-        <div
+        </div> -->
+      <!-- Clothing Items -->
+      <!-- <div
           class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
           id="clothingItems"
           *ngSwitchCase="'Clothing'"
@@ -164,9 +237,9 @@
               </option></select
             ><label for="clothing-item" class="form-label">Item</label>
           </div>
-        </div>
-        <!-- Woodworking Items -->
-        <div
+        </div> -->
+      <!-- Woodworking Items -->
+      <!-- <div
           class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
           id="woodworkingItems"
           *ngSwitchCase="'Woodworking'"
@@ -184,9 +257,9 @@
               </option></select
             ><label for="woodworking-item" class="form-label">Item</label>
           </div>
-        </div>
-        <!-- Jewelery Items -->
-        <div
+        </div> -->
+      <!-- Jewelery Items -->
+      <!-- <div
           class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
           id="jeweleryItems"
           *ngSwitchCase="'Jewelery'"
@@ -204,8 +277,8 @@
               </option></select
             ><label for="jewelery-item" class="form-label">Item</label>
           </div>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <!-- Traits  -->
       <div>
         <!-- Weapon Traits -->

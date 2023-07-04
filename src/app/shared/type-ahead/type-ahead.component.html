@@ -1,2 +1,10 @@
-<!-- [typeahead]="options" -->
-<input [(ngModel)]="selected" class="form-control" />
+<label for="typeahead-basic">{{ labeltext }}</label>
+<input
+  id="typeahead-basic"
+  type="text"
+  class="form-control"
+  [(ngModel)]="selected"
+  [ngbTypeahead]="search"
+  [disabled]="disableFromParent"
+  (selectItem)="handleSelectItem($event)"
+/>
