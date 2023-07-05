@@ -1,5 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { armor_sets } from 'constants/armor_sets';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -9,6 +16,9 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
   styleUrls: ['./type-ahead.component.scss'],
 })
 export class TypeAheadComponent implements OnInit {
+  @ViewChild('typeaheadInput', { static: false })
+  typeaheadInput!: ElementRef<HTMLInputElement>;
+
   @Input() options: string[];
   @Input() labeltext: string;
   @Input() disableFromParent: boolean;
@@ -18,6 +28,12 @@ export class TypeAheadComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  focusInput(): void {
+    if (this.typeaheadInput) {
+      this.typeaheadInput.nativeElement.focus();
+    }
+  }
 
   handleSelectItem(event: any): void {
     this.selected = event.item;

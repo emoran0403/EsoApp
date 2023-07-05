@@ -1,369 +1,150 @@
-<form>
-  <!-- !?! 
-  style, item, trait form fields should be displayed and disabled
-  until releveant previous choice has been selected
-  -->
-
-  <!-- Writ Type -->
-  <div class="container">
-    <div class="row">
-      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div
-          class="my-3 d-flex flex-row justify-content-around"
-          id="writTypeDropdown"
-        >
-          <select-dropdown
-            class="col-3"
-            [buttonText]="'Writ Type'"
-            [options]="writTypeOptions"
-            [disableFromParent]="false"
-            (selectedOption)="handleOptionTypeChange($event)"
-          >
-          </select-dropdown>
-          <div class="col-9">
-            <h5 *ngIf="showWritType" class="card-title text-center">
-              {{ writType }}
-            </h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Quality -->
-  <div class="container">
-    <div class="row">
-      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div
-          class="my-3 d-flex flex-row justify-content-around"
-          id="qualityTypeDropdown"
-        >
-          <select-dropdown
-            class="col-3"
-            [buttonText]="'Quality'"
-            [options]="qualities"
-            [disableFromParent]="false"
-            (selectedOption)="handleQualityChange($event)"
-          >
-          </select-dropdown>
-          <div class="col-9">
-            <h5 *ngIf="showQuality" class="card-title text-center">
-              {{ quality }}
-            </h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Set -->
-  <type-ahead
-    [labeltext]="'Set'"
-    [options]="armorSets"
-    (optionSelected)="handleSetChange($event)"
-  ></type-ahead>
-
-  <!-- Style -->
-  <type-ahead
-    [labeltext]="'Style'"
-    [options]="styles"
-    [disableFromParent]="showStyle"
-    (optionSelected)="handleStyleChange($event)"
-  ></type-ahead>
-
-  <!-- Items -->
-  <div class="container">
-    <div class="row">
-      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div
-          class="my-3 d-flex flex-row justify-content-around"
-          id="itemDropdown"
-        >
-          <select-dropdown
-            class="col-3"
-            [buttonText]="'Item'"
-            [options]="itemOptions"
-            [disableFromParent]="showItem"
-            (selectedOption)="handleItemChange($event)"
-          >
-          </select-dropdown>
-          <div class="col-9">
-            <h5 *ngIf="!showItem" class="card-title text-center">
-              {{ item }}
-            </h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Traits  -->
-  <div class="container">
-    <div class="row">
-      <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div
-          class="my-3 d-flex flex-row justify-content-around"
-          id="itemDropdown"
-        >
-          <select-dropdown
-            class="col-3"
-            [buttonText]="'Trait'"
-            [options]="itemOptions"
-            [disableFromParent]="showItem"
-            (selectedOption)="handleItemChange($event)"
-          >
-          </select-dropdown>
-          <div class="col-9">
-            <h5 *ngIf="!showItem" class="card-title text-center">
-              {{ item }}
-            </h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Writ Type -->
-      <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div class="form-floating">
-          <select
-            id="writType"
-            name="writType"
-            class="form-select"
-            [(ngModel)]="writType"
-            (change)="writTypeChange($event)"
-          >
-            <option *ngFor="let option of writTypeOptions">
-              {{ option }}
-            </option>
-          </select>
-          <label for="writType" class="form-label">Writ Type</label>
-        </div>
-      </div> -->
-      <!-- Quality  -->
-      <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-        <div class="form-floating">
-          <select
-            id="quality"
-            name="quality"
-            class="form-select"
-            [(ngModel)]="quality"
-            (change)="qualityChange($event)"
-          >
-            <option *ngFor="let quality of qualities">
-              {{ quality }}
-            </option>
-          </select>
-          <label for="quality" class="form-label">Quality</label>
-        </div>
-      </div> -->
-      <!-- Set -->
-      <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3" id="armorSet">
-        <div class="form-floating">
-          <select
-            id="set"
-            name="set"
-            class="form-select"
-            [(ngModel)]="armorSet"
-            (change)="armorSetChange($event)"
-          >
-            <option *ngFor="let set of armorSets">
-              {{ set }}
-            </option></select
-          ><label for="set" class="form-label">Set</label>
-        </div>
-      </div> -->
-      <!-- Style -->
-      <!-- <div
-        class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-        id="style"
-        *ngIf="showStyle"
+<!-- Writ Type -->
+<div class="container">
+  <div class="row">
+    <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+      <div
+        class="my-3 d-flex flex-row justify-content-around"
+        id="writTypeDropdown"
       >
-        <div class="form-floating">
-          <select
-            id="styles"
-            name="styles"
-            class="form-select"
-            [(ngModel)]="style"
-            (change)="styleChange($event)"
-          >
-            <option *ngFor="let style of styles">
-              {{ style }}
-            </option></select
-          ><label for="styles" class="form-label">Style</label>
+        <select-dropdown
+          class="col-3"
+          [buttonText]="'Writ Type'"
+          [options]="craftingTypes"
+          [disableFromParent]="false"
+          (selectedOption)="handleOptionTypeChange($event)"
+        >
+        </select-dropdown>
+        <div class="col-9">
+          <h5 *ngIf="showWritType" class="card-title text-center">
+            {{ writType }}
+          </h5>
         </div>
-      </div> -->
-      <!-- Items -->
-      <!-- <div [ngSwitch]="writType"> -->
-      <!-- Blacksmithing Items -->
-      <!-- <div
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-          id="blacksmithingItems"
-          *ngSwitchCase="'Blacksmithing'"
-        >
-          <div class="form-floating">
-            <select
-              id="blacksmithing-item"
-              name="blacksmithing-item"
-              class="form-select"
-              [(ngModel)]="item"
-              (change)="itemChange($event)"
-            >
-              <option *ngFor="let item of blacksmithingItems">
-                {{ item }}
-              </option>
-            </select>
-            <label for="blacksmithing-item" class="form-label">Item</label>
-          </div>
-        </div> -->
-      <!-- Clothing Items -->
-      <!-- <div
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-          id="clothingItems"
-          *ngSwitchCase="'Clothing'"
-        >
-          <div class="form-floating">
-            <select
-              id="clothing-item"
-              name="clothing-item"
-              class="form-select"
-              [(ngModel)]="item"
-              (change)="itemChange($event)"
-            >
-              <option *ngFor="let item of clothingItems">
-                {{ item }}
-              </option></select
-            ><label for="clothing-item" class="form-label">Item</label>
-          </div>
-        </div> -->
-      <!-- Woodworking Items -->
-      <!-- <div
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-          id="woodworkingItems"
-          *ngSwitchCase="'Woodworking'"
-        >
-          <div class="form-floating">
-            <select
-              id="woodworking-item"
-              name="woodworking-item"
-              class="form-select"
-              [(ngModel)]="item"
-              (change)="itemChange($event)"
-            >
-              <option *ngFor="let item of woodItems">
-                {{ item }}
-              </option></select
-            ><label for="woodworking-item" class="form-label">Item</label>
-          </div>
-        </div> -->
-      <!-- Jewelery Items -->
-      <!-- <div
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-          id="jeweleryItems"
-          *ngSwitchCase="'Jewelery'"
-        >
-          <div class="form-floating">
-            <select
-              id="jewelery-item"
-              name="jewelery-item"
-              class="form-select"
-              [(ngModel)]="item"
-              (change)="itemChange($event)"
-            >
-              <option *ngFor="let item of jeweleryItems">
-                {{ item }}
-              </option></select
-            ><label for="jewelery-item" class="form-label">Item</label>
-          </div>
-        </div> -->
-      <!-- </div> -->
-      <!-- Traits  -->
-      <div>
-        <!-- Weapon Traits -->
-        <div
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-          id="weaponTraits"
-          *ngIf="showWeaponTraits"
-        >
-          <div class="form-floating">
-            <select
-              id="weapon-trait"
-              name="weapon-trait"
-              class="form-select"
-              [(ngModel)]="trait"
-              (change)="traitChanged($event)"
-            >
-              <option *ngFor="let trait of weaponTraits">
-                {{ trait }}
-              </option></select
-            ><label for="weapon-trait" class="form-label">Trait</label>
-          </div>
-        </div>
-        <!-- Armor Traits -->
-        <div
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-          id="armorTraits"
-          *ngIf="showArmorTraits"
-        >
-          <div class="form-floating">
-            <select
-              id="armor-trait"
-              name="armor-trait"
-              class="form-select"
-              [(ngModel)]="trait"
-              (change)="traitChanged($event)"
-            >
-              <option *ngFor="let trait of armorTraits">
-                {{ trait }}
-              </option></select
-            ><label for="armor-trait" class="form-label">Trait</label>
-          </div>
-        </div>
-        <!-- Jewelery Traits -->
-        <div
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3"
-          id="jeweleryTraits"
-          *ngIf="showJeweleryTraits"
-        >
-          <div class="form-floating">
-            <select
-              id="jewelery-trait"
-              name="jewelery-trait"
-              class="form-select"
-              [(ngModel)]="trait"
-              (change)="traitChanged($event)"
-            >
-              <option *ngFor="let trait of JeweleryTraits">
-                {{ trait }}
-              </option></select
-            ><label for="jewelery-trait" class="form-label">Trait</label>
-          </div>
-        </div>
-      </div>
-      <!-- Reward -->
-      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3" id="reward">
-        <div class="form-floating">
-          <input
-            id="rewards"
-            name="rewards"
-            class="form-control"
-            type="number"
-            min="0"
-            [(ngModel)]="reward"
-            (change)="rewardChanged($event)"
-            (beforeinput)="handleBeforeInput($event)"
-          /><label for="rewards" class="form-label">Writ Reward</label>
-        </div>
-      </div>
-      <!-- Submission -->
-      <div class="d-flex justify-content-center">
-        <button class="btn btn-primary mx-3" (click)="submitWrit()">
-          Submit
-        </button>
-        <button class="btn btn-warning mx-3" (click)="resetAll()">Clear</button>
       </div>
     </div>
   </div>
-</form>
+</div>
+
+<!-- Quality -->
+<div class="container">
+  <div class="row">
+    <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+      <div
+        class="my-3 d-flex flex-row justify-content-around"
+        id="qualityTypeDropdown"
+      >
+        <select-dropdown
+          class="col-3"
+          [buttonText]="'Quality'"
+          [options]="qualities"
+          [disableFromParent]="false"
+          (selectedOption)="handleQualityChange($event)"
+        >
+        </select-dropdown>
+        <div class="col-9">
+          <h5 *ngIf="showQuality" class="card-title text-center">
+            {{ quality }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Set -->
+<type-ahead
+  #typeaheadSet
+  [labeltext]="'Set'"
+  [options]="armorSets"
+  (optionSelected)="handleSetChange($event)"
+  (click)="onInputClick('set')"
+></type-ahead>
+
+<!-- Style -->
+<type-ahead
+  #typeaheadStyle
+  [labeltext]="'Style'"
+  [options]="styles"
+  [disableFromParent]="showStyle"
+  (optionSelected)="handleStyleChange($event)"
+  (click)="onInputClick('style')"
+></type-ahead>
+
+<!-- Items -->
+<div class="container">
+  <div class="row">
+    <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+      <div
+        class="my-3 d-flex flex-row justify-content-around"
+        id="itemDropdown"
+      >
+        <select-dropdown
+          class="col-3"
+          [buttonText]="'Item'"
+          [options]="itemOptions"
+          [disableFromParent]="showItem"
+          (selectedOption)="handleItemChange($event)"
+        >
+        </select-dropdown>
+        <div class="col-9">
+          <h5 *ngIf="!showItem" class="card-title text-center">
+            {{ item }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Traits  -->
+<div class="container">
+  <div class="row">
+    <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+      <div
+        class="my-3 d-flex flex-row justify-content-around"
+        id="itemDropdown"
+      >
+        <select-dropdown
+          class="col-3"
+          [buttonText]="'Trait'"
+          [options]="traitOptions"
+          [disableFromParent]="showTrait"
+          (selectedOption)="handleTraitChange($event)"
+        >
+        </select-dropdown>
+        <div class="col-9">
+          <h5 *ngIf="!showTrait" class="card-title text-center">
+            {{ trait }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reward and Submission -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Reward -->
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3" id="reward">
+      <div class="form-floating">
+        <input
+          id="rewards"
+          name="rewards"
+          class="form-control"
+          type="number"
+          min="0"
+          [(ngModel)]="reward"
+          (change)="rewardChanged($event)"
+          (beforeinput)="handleBeforeInput($event)"
+        /><label for="rewards" class="form-label">Writ Reward</label>
+      </div>
+    </div>
+    <!-- Submission -->
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-primary mx-3" (click)="submitWrit()">
+        Submit
+      </button>
+      <button class="btn btn-warning mx-3" (click)="resetAll()">Clear</button>
+    </div>
+  </div>
+</div>
