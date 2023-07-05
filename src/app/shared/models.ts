@@ -1,5 +1,12 @@
 export type skill = 'blacksmithing' | 'clothing' | 'woodworking' | 'jewelery';
 export type item_class = 'armor' | 'weapons' | 'jewelery';
+export type crafting_types =
+  | 'Blacksmithing - Weapons'
+  | 'Blacksmithing - Armor'
+  | 'Woodworking - Weapons'
+  | 'Woodworking - Armor'
+  | 'Clothing'
+  | 'Jewelery';
 
 export type weapon_traits =
   | 'Powered'

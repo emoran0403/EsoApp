@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { Observable, OperatorFunction } from 'rxjs';
@@ -22,12 +23,28 @@ export class TypeAheadComponent implements OnInit {
   @Input() options: string[];
   @Input() labeltext: string;
   @Input() disableFromParent: boolean;
+  @Input() selectedFromParent: boolean;
   selected?: string;
   @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    return;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Reset the selected property to an empty string
+    if (
+      changes['selectedFromParent'] &&
+      !changes['selectedFromParent'].firstChange
+    ) {
+      const selectedFromParent = changes['selectedFromParent'].currentValue;
+      if (!selectedFromParent) {
+        this.selected = '';
+      }
+    }
+  }
 
   focusInput(): void {
     if (this.typeaheadInput) {

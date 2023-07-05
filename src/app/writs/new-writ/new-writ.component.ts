@@ -20,6 +20,7 @@ import {
 } from 'constants/traits/traits';
 import { QUALITY, WRIT_TYPE, writ, writ_type_options } from 'constants/writs';
 import { isNil } from 'lodash';
+import { CRATFING_TYPES } from 'src/app/shared/constants';
 import { all_trait_options } from 'src/app/shared/models';
 import { TypeAheadComponent } from 'src/app/shared/type-ahead/type-ahead.component';
 
@@ -39,11 +40,7 @@ export class NewWritComponent implements OnInit {
 
   readonly writTypeOptions: writ_type_options[] = WRIT_TYPE;
   readonly qualities: item_quality[] = QUALITY;
-  // readonly blacksmithingItems: metal_items_arr[] = METAL_ITEMS_ARR;
-  // readonly clothingItems: clothing_items_arr[] = CLOTHING_ITEMS_ARR;
-  // readonly woodItems: wood_items_arr[] = WOOD_ITEMS_ARR;
   readonly weaponTraits: weapon_traits[] = WEAPON_TRAITS_ARR;
-  // readonly weapons: all_weapons_list[] = ALL_WEAPONS_LIST;
   readonly armorTraits: armor_traits[] = ARMOR_TRAITS;
   readonly jeweleryTraits: jewelery_traits[] = JEWELERY_TRAITS;
   readonly armorSets: armor_sets[] = ALL_SETS.sort();
@@ -57,6 +54,9 @@ export class NewWritComponent implements OnInit {
   readonly woodArmor = WOOD_APPAREL;
   readonly jeweleryItems = JEWELERY_ITEMS_ARR;
 
+  readonly craftingTypes = CRATFING_TYPES;
+
+  // Writ information
   writType: writ_type_options | null;
   quality: item_quality | null;
   item: all_items_list | null;
@@ -65,96 +65,61 @@ export class NewWritComponent implements OnInit {
   style: styles | null;
   reward: number | null;
 
-  showWeaponTraits: boolean = false;
-  showArmorTraits: boolean = false;
-  showJeweleryTraits: boolean = false;
+  // Options for select-dropdowns
+  traitOptions: all_trait_options;
+  itemOptions: string[];
+
+  // Display booleans
   showStyle: boolean = true;
+  showWritType: boolean = false;
+  showQuality: boolean = false;
+  showItem: boolean = true;
+  showTrait: boolean = true;
 
-  writTypeChange(event: any): void {
-    // console.log(event.target.value);
-    switch (event.target.value) {
-      case 'Jewelery':
-        this.resetWritInfo();
-        this.showJeweleryTraits = true;
-        this.showStyle = false;
-        break;
-      case 'Blacksmithing':
-        this.resetWritInfo();
-        this.showStyle = true;
+  resetterForTypeahead = true;
 
-        break;
-      case 'Woodworking':
-        this.resetWritInfo();
-        this.showStyle = true;
-
-        break;
-      case 'Clothing':
-        this.resetWritInfo();
-        this.showStyle = true;
-
-        break;
-    }
+  ngOnInit() {
+    return;
   }
 
+  /**
+   * Resets writ info and display booleans
+   */
   resetAll(): void {
     this.resetWritInfo();
-    this.resetWritType();
-    this.resetQuality();
-    this.resetReward();
-    this.showJeweleryTraits = false;
-    this.showStyle = false;
+    this.resetDisplayBooleans();
+    this.resetterForTypeahead = false;
+    setTimeout(() => {
+      this.resetterForTypeahead = true;
+    }, 0);
   }
 
+  /**
+   * Resets Writ info
+   */
   resetWritInfo(): void {
-    this.setTraitDisplayToFalse();
-    this.resetItemsAndTraits();
-    this.resetArmorSet();
-    this.resetStyle();
-  }
-
-  setTraitDisplayToFalse(): void {
-    this.showWeaponTraits = false;
-    this.showArmorTraits = false;
-    this.showJeweleryTraits = false;
-  }
-
-  resetItemsAndTraits(): void {
-    this.item = null;
-    this.resetTrait();
-  }
-
-  resetWritType(): void {
     this.writType = null;
-  }
-  resetQuality(): void {
     this.quality = null;
-  }
-  resetTrait(): void {
+    this.item = null;
     this.trait = null;
-  }
-  resetArmorSet(): void {
     this.armorSet = null;
-  }
-  resetStyle(): void {
     this.style = null;
-  }
-  resetReward(): void {
     this.reward = null;
   }
 
-  qualityChange(event: any): void {
-    this.quality = event.target.value;
-  }
-  traitChanged(event: any): void {
-    this.trait = event.target.value;
-  }
-  armorSetChange(event: any): void {
-    this.armorSet = event.target.value;
-  }
-  styleChange(event: any): void {
-    this.style = event.target.value;
+  resetDisplayBooleans(): void {
+    this.showStyle = true;
+    this.showWritType = false;
+    this.showQuality = false;
+    this.showItem = true;
+    this.showTrait = true;
   }
 
+  /**
+   * Used to help sanitize reward inputs
+   * @param event
+   * @returns
+   */
   handleBeforeInput(event: any): void {
     // allow backspace and delete to work as intended
     const allowedKey =
@@ -173,37 +138,29 @@ export class NewWritComponent implements OnInit {
     if (disallowedKeys) event.preventDefault();
   }
 
+  /**
+   * Used to set reward
+   * @param event
+   */
   rewardChanged(event: any): void {
     this.reward = Number.parseInt(event.target.value);
   }
 
-  // itemChange(event: any): void {
-  //   this.resetTrait();
-  //   console.log(event.target.value);
-  //   const isWeapon = this.weapons.includes(event.target.value);
-  //   const isJwelery = this.jeweleryItems.includes(event.target.value);
-
-  //   if (isJwelery) {
-  //     this.showJeweleryTraits = true;
-  //     this.showWeaponTraits = false;
-  //     this.showArmorTraits = false;
-  //   } else {
-  //     if (isWeapon) {
-  //       this.showWeaponTraits = true;
-  //       this.showArmorTraits = false;
-  //     } else {
-  //       this.showWeaponTraits = false;
-  //       this.showArmorTraits = true;
-  //     }
-  //   }
-  // }
-
+  /**
+   * Used to validate writ
+   * @param writ
+   * @returns boolean true if writ is valid, false otherwise
+   */
   writIsValid(writ: writ): boolean {
     return !Object.values(writ)
       .map((value) => isNil(value))
       .includes(true);
   }
 
+  /**
+   * Makes a service call to save the writ
+   * @returns
+   */
   submitWrit(): void {
     const writToSubmit: writ = {
       is_jewelery: this.writType === 'Jewelery' ? true : false,
@@ -224,21 +181,10 @@ export class NewWritComponent implements OnInit {
     console.log('writ is not valid!');
   }
 
-  ngOnInit() {
-    return;
-  }
-
-  craftingTypes: string[] = [
-    'Blacksmithing - Weapons',
-    'Blacksmithing - Armor',
-    'Woodworking - Weapons',
-    'Woodworking - Armor',
-    'Clothing',
-    'Jewelery',
-  ];
-
-  traitOptions: all_trait_options;
-  showWritType: boolean = false;
+  /**
+   * Sets values based on the writ type
+   * @param type
+   */
   handleOptionTypeChange(type: any): void {
     console.log('writ type: ', type);
 
@@ -286,37 +232,56 @@ export class NewWritComponent implements OnInit {
     }
   }
 
-  showQuality: boolean = false;
+  /**
+   * Sets the writ quality and display boolean allowing quality to be shown
+   * @param quality
+   */
   handleQualityChange(quality: any): void {
-    console.log('quality: ', quality);
+    // console.log('quality: ', quality);
     this.quality = quality;
     this.showQuality = true;
   }
 
-  showSet: boolean = false;
+  /**
+   * Sets the writ armorSet
+   * @param set
+   */
   handleSetChange(set: string): void {
     this.armorSet = set as armor_sets;
-    console.log('set change event: ', set);
+    // console.log('set change event: ', set);
   }
 
+  /**
+   * Sets the writ style
+   * @param style
+   */
   handleStyleChange(style: string): void {
     this.style = style as styles;
-    console.log('style change event: ', style);
+    // console.log('style change event: ', style);
   }
 
-  itemOptions: string[];
-  showItem: boolean = true;
+  /**
+   * Sets the writ item
+   * @param item
+   */
   handleItemChange(item: any): void {
     this.item = item;
-    console.log('item: ', item);
+    // console.log('item: ', item);
   }
 
-  showTrait: boolean = true;
+  /**
+   * Sets the writ trait
+   * @param trait
+   */
   handleTraitChange(trait: any): void {
     this.trait = trait;
-    console.log('trait: ', trait);
+    // console.log('trait: ', trait);
   }
 
+  /**
+   * Focus the typeahead component to call the keyboard
+   * @param input
+   */
   onInputClick(input: 'set' | 'style'): void {
     if (input === 'set') {
       this.typeaheadSet.focusInput();
