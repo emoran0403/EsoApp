@@ -10,12 +10,39 @@ import { URLS } from './constants';
 export class WritsService {
   constructor(private readonly http: HttpClient) {}
 
-  getAllWrits(): Observable<any> {
+  getAll(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       player_uuid: '100',
     });
 
-    return this.http.get(URLS.traits.getAll, { headers });
+    return this.http.get(URLS.writs.getAll, { headers });
+  }
+
+  create(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      player_uuid: '100',
+    });
+
+    return this.http.get(URLS.writs.createOne, { headers });
+  }
+
+  update(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      player_uuid: '100',
+    });
+
+    return this.http.get(URLS.writs.updateOne, { headers });
+  }
+
+  generateTable(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      player_uuid: '100',
+    });
+
+    return this.http.get(URLS.writs.generate, { headers });
   }
 }
