@@ -75,6 +75,8 @@ export class NewWritComponent implements OnInit {
   showQuality: boolean = false;
   showItem: boolean = true;
   showTrait: boolean = true;
+  showSubmission: boolean = false;
+  submissionStatus: boolean;
 
   resetterForTypeahead = true;
 
@@ -175,6 +177,9 @@ export class NewWritComponent implements OnInit {
     console.log('submitting writ: ', writToSubmit);
     if (this.writIsValid(writToSubmit)) {
       // make service call to submit writ
+      // subscribe to observable, and set this.submissionStatus to true or false
+      // then set this.submissionStatus to true
+      // this.showSubmission = true;
       // this.resetAll();
       return;
     }
