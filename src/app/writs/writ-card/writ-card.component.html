@@ -11,19 +11,19 @@
       class="list-group-item"
       [ngClass]="hasTrait ? 'bg-success-subtle' : 'bg-warning-subtle'"
     >
-      {{ writ.trait }}
+      Trait: <span class="fw-bold">{{ writ.trait }}</span>
     </li>
     <li
       class="list-group-item"
       [ngClass]="hasArmorSet ? 'bg-success-subtle' : 'bg-warning-subtle'"
     >
-      {{ writ.armorSet }}
+      Set: <span class="fw-bold">{{ writ.armorSet }}</span>
     </li>
     <li
       class="list-group-item"
       [ngClass]="hasStyle ? 'bg-success-subtle' : 'bg-warning-subtle'"
     >
-      {{ writ.style }}
+      Style: <span class="fw-bold">{{ writ.style }}</span>
     </li>
   </ul>
   <div class="body">
