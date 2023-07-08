@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { URLS } from './constants';
+import { writ } from 'constants/writs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +19,13 @@ export class WritsService {
     return this.http.get(URLS.writs.getAll, { headers });
   }
 
-  create(): Observable<any> {
+  create(writ: writ): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       player_uuid: '69',
     });
 
-    return this.http.get(URLS.writs.createOne, { headers });
+    return this.http.post(URLS.writs.createOne, writ, { headers });
   }
 
   update(): Observable<any> {

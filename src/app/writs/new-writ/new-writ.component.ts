@@ -20,6 +20,7 @@ import {
 } from 'constants/traits/traits';
 import { QUALITY, WRIT_TYPE, writ, writ_type_options } from 'constants/writs';
 import { isNil } from 'lodash';
+import { WritsService } from 'src/app/services/writs.service';
 import { CRATFING_TYPES } from 'src/app/shared/constants';
 import { all_trait_options } from 'src/app/shared/models';
 import { TypeAheadComponent } from 'src/app/shared/type-ahead/type-ahead.component';
@@ -36,7 +37,7 @@ export class NewWritComponent implements OnInit {
   @ViewChild('typeaheadStyle', { static: false })
   typeaheadStyle!: TypeAheadComponent;
 
-  constructor() {}
+  constructor(private readonly writs: WritsService) {}
 
   readonly writTypeOptions: writ_type_options[] = WRIT_TYPE;
   readonly qualities: item_quality[] = QUALITY;
@@ -61,7 +62,7 @@ export class NewWritComponent implements OnInit {
   quality: item_quality | null;
   item: all_items_list | null;
   trait: all_traits_list | null;
-  armorSet: armor_sets | null;
+  set: armor_sets | null;
   style: styles | null;
   reward: number | null;
   writToSubmit: writ;
@@ -88,12 +89,12 @@ export class NewWritComponent implements OnInit {
       quality: this.quality,
       item: this.item,
       trait: this.trait,
-      armorSet: this.armorSet,
+      set: this.set,
       style: this.style,
       reward: this.reward,
     };
 
-    console.log('this.writToSubmit in On Init: ', this.writToSubmit);
+    // console.log('this.writToSubmit in On Init: ', this.writToSubmit);
     return;
   }
 
@@ -117,7 +118,7 @@ export class NewWritComponent implements OnInit {
     this.quality = null;
     this.item = null;
     this.trait = null;
-    this.armorSet = null;
+    this.set = null;
     this.style = null;
     this.reward = null;
 
@@ -126,14 +127,17 @@ export class NewWritComponent implements OnInit {
       quality: null,
       item: null,
       trait: null,
-      armorSet: null,
+      set: null,
       style: null,
       reward: null,
     };
 
-    console.log('this.writToSubmit in reset: ', this.writToSubmit);
+    // console.log('this.writToSubmit in reset: ', this.writToSubmit);
   }
 
+  /**
+   * Resets display booleans to default values
+   */
   resetDisplayBooleans(): void {
     this.showStyle = true;
     this.showWritType = false;
@@ -185,7 +189,7 @@ export class NewWritComponent implements OnInit {
       quality: this.quality,
       item: this.item,
       trait: this.trait,
-      armorSet: this.armorSet,
+      set: this.set,
       style: this.style,
       reward: this.reward,
     };
@@ -199,8 +203,8 @@ export class NewWritComponent implements OnInit {
       this.submittable = false;
     }
 
-    console.log('validity: ', validity);
-    console.log('this.writToSubmit: ', this.writToSubmit);
+    // console.log('validity: ', validity);
+    // console.log('this.writToSubmit: ', this.writToSubmit);
 
     return validity;
   }
@@ -213,6 +217,9 @@ export class NewWritComponent implements OnInit {
     console.log('submitting writ: ', this.writToSubmit);
     if (this.writIsValid()) {
       // make service call to submit writ
+      this.writs.create(this.writToSubmit).subscribe((data) => {
+        console.log('data: ', data);
+      });
       // subscribe to observable, and set this.submissionStatus to true or false
       // then set this.submissionStatus to true
       // this.showSubmission = true;
@@ -228,7 +235,7 @@ export class NewWritComponent implements OnInit {
    * @param type
    */
   handleOptionTypeChange(type: any): void {
-    console.log('writ type: ', type);
+    // console.log('writ type: ', type);
 
     this.showWritType = true;
     this.showItem = false;
@@ -295,7 +302,7 @@ export class NewWritComponent implements OnInit {
    * @param set
    */
   handleSetChange(set: string): void {
-    this.armorSet = set as armor_sets;
+    this.set = set as armor_sets;
     this.writIsValid();
     // console.log('set change event: ', set);
   }

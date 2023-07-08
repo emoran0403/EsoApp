@@ -8,7 +8,7 @@ export interface writ {
   item: all_items_list;
   quality: item_quality;
   trait: all_traits_list;
-  armorSet: armor_sets;
+  set: armor_sets;
   style: styles;
   reward: number;
 }
