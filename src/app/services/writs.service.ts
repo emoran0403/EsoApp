@@ -13,7 +13,7 @@ export class WritsService {
   getAll(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      player_uuid: '100',
+      player_uuid: '69',
     });
 
     return this.http.get(URLS.writs.getAll, { headers });
@@ -22,7 +22,7 @@ export class WritsService {
   create(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      player_uuid: '100',
+      player_uuid: '69',
     });
 
     return this.http.get(URLS.writs.createOne, { headers });
@@ -31,7 +31,7 @@ export class WritsService {
   update(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      player_uuid: '100',
+      player_uuid: '69',
     });
 
     return this.http.get(URLS.writs.updateOne, { headers });
@@ -40,7 +40,7 @@ export class WritsService {
   generateTable(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      player_uuid: '100',
+      player_uuid: '69',
     });
 
     return this.http.get(URLS.writs.generate, { headers });

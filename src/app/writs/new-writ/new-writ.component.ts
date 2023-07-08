@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ALL_SETS, armor_sets } from 'constants/armor_sets';
 import {
   JEWELERY_ITEMS_ARR,
@@ -64,6 +64,7 @@ export class NewWritComponent implements OnInit {
   armorSet: armor_sets | null;
   style: styles | null;
   reward: number | null;
+  writToSubmit: writ;
 
   // Options for select-dropdowns
   traitOptions: all_trait_options;
@@ -76,11 +77,23 @@ export class NewWritComponent implements OnInit {
   showItem: boolean = true;
   showTrait: boolean = true;
   showSubmission: boolean = false;
+  submittable: boolean = false;
   submissionStatus: boolean;
 
   resetterForTypeahead = true;
 
   ngOnInit() {
+    this.writToSubmit = {
+      is_jewelery: this.writType === 'Jewelery' ? true : false,
+      quality: this.quality,
+      item: this.item,
+      trait: this.trait,
+      armorSet: this.armorSet,
+      style: this.style,
+      reward: this.reward,
+    };
+
+    console.log('this.writToSubmit in On Init: ', this.writToSubmit);
     return;
   }
 
@@ -107,6 +120,18 @@ export class NewWritComponent implements OnInit {
     this.armorSet = null;
     this.style = null;
     this.reward = null;
+
+    this.writToSubmit = {
+      is_jewelery: false,
+      quality: null,
+      item: null,
+      trait: null,
+      armorSet: null,
+      style: null,
+      reward: null,
+    };
+
+    console.log('this.writToSubmit in reset: ', this.writToSubmit);
   }
 
   resetDisplayBooleans(): void {
@@ -146,6 +171,7 @@ export class NewWritComponent implements OnInit {
    */
   rewardChanged(event: any): void {
     this.reward = Number.parseInt(event.target.value);
+    this.writIsValid();
   }
 
   /**
@@ -153,18 +179,8 @@ export class NewWritComponent implements OnInit {
    * @param writ
    * @returns boolean true if writ is valid, false otherwise
    */
-  writIsValid(writ: writ): boolean {
-    return !Object.values(writ)
-      .map((value) => isNil(value))
-      .includes(true);
-  }
-
-  /**
-   * Makes a service call to save the writ
-   * @returns
-   */
-  submitWrit(): void {
-    const writToSubmit: writ = {
+  writIsValid(): boolean {
+    this.writToSubmit = {
       is_jewelery: this.writType === 'Jewelery' ? true : false,
       quality: this.quality,
       item: this.item,
@@ -173,14 +189,35 @@ export class NewWritComponent implements OnInit {
       style: this.style,
       reward: this.reward,
     };
+    const validity = !Object.values(this.writToSubmit)
+      .map((value) => isNil(value))
+      .includes(true);
 
-    console.log('submitting writ: ', writToSubmit);
-    if (this.writIsValid(writToSubmit)) {
+    if (validity) {
+      this.submittable = true;
+    } else {
+      this.submittable = false;
+    }
+
+    console.log('validity: ', validity);
+    console.log('this.writToSubmit: ', this.writToSubmit);
+
+    return validity;
+  }
+
+  /**
+   * Makes a service call to save the writ
+   * @returns
+   */
+  submitWrit(): void {
+    console.log('submitting writ: ', this.writToSubmit);
+    if (this.writIsValid()) {
       // make service call to submit writ
       // subscribe to observable, and set this.submissionStatus to true or false
       // then set this.submissionStatus to true
       // this.showSubmission = true;
       // this.resetAll();
+      this.submittable = false;
       return;
     }
     console.log('writ is not valid!');
@@ -196,6 +233,10 @@ export class NewWritComponent implements OnInit {
     this.showWritType = true;
     this.showItem = false;
     this.showTrait = false;
+
+    this.item = null;
+    this.trait = null;
+    this.style = null;
 
     switch (type) {
       case 'Blacksmithing - Weapons':
@@ -235,6 +276,7 @@ export class NewWritComponent implements OnInit {
     } else {
       this.showStyle = false;
     }
+    this.writIsValid();
   }
 
   /**
@@ -245,6 +287,7 @@ export class NewWritComponent implements OnInit {
     // console.log('quality: ', quality);
     this.quality = quality;
     this.showQuality = true;
+    this.writIsValid();
   }
 
   /**
@@ -253,6 +296,7 @@ export class NewWritComponent implements OnInit {
    */
   handleSetChange(set: string): void {
     this.armorSet = set as armor_sets;
+    this.writIsValid();
     // console.log('set change event: ', set);
   }
 
@@ -262,6 +306,7 @@ export class NewWritComponent implements OnInit {
    */
   handleStyleChange(style: string): void {
     this.style = style as styles;
+    this.writIsValid();
     // console.log('style change event: ', style);
   }
 
@@ -271,6 +316,7 @@ export class NewWritComponent implements OnInit {
    */
   handleItemChange(item: any): void {
     this.item = item;
+    this.writIsValid();
     // console.log('item: ', item);
   }
 
@@ -280,6 +326,7 @@ export class NewWritComponent implements OnInit {
    */
   handleTraitChange(trait: any): void {
     this.trait = trait;
+    this.writIsValid();
     // console.log('trait: ', trait);
   }
 

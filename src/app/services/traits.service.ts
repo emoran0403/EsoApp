@@ -17,7 +17,7 @@ export class TraitsService {
   getAllTraits(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      player_uuid: '100',
+      player_uuid: '69',
     });
 
     return this.http.get(URLS.traits.getAll, { headers }).pipe(
@@ -34,10 +34,10 @@ export class TraitsService {
   ): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      player_uuid: '100',
+      player_uuid: '69',
     });
     const body = {
-      player_uuid: '100',
+      player_uuid: '69',
       item,
       trait,
       completion,
