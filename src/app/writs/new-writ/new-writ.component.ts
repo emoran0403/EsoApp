@@ -65,7 +65,6 @@ export class NewWritComponent implements OnInit {
   set: armor_sets | null;
   style: styles | null;
   reward: number | null;
-  writToSubmit: writ;
 
   // Options for select-dropdowns
   traitOptions: all_trait_options;
@@ -84,17 +83,6 @@ export class NewWritComponent implements OnInit {
   resetterForTypeahead = true;
 
   ngOnInit() {
-    this.writToSubmit = {
-      is_jewelery: this.writType === 'Jewelery' ? true : false,
-      quality: this.quality,
-      item: this.item,
-      trait: this.trait,
-      set: this.set,
-      style: this.style,
-      reward: this.reward,
-    };
-
-    // console.log('this.writToSubmit in On Init: ', this.writToSubmit);
     return;
   }
 
@@ -121,16 +109,6 @@ export class NewWritComponent implements OnInit {
     this.set = null;
     this.style = null;
     this.reward = null;
-
-    this.writToSubmit = {
-      is_jewelery: false,
-      quality: null,
-      item: null,
-      trait: null,
-      set: null,
-      style: null,
-      reward: null,
-    };
 
     // console.log('this.writToSubmit in reset: ', this.writToSubmit);
   }
@@ -184,16 +162,17 @@ export class NewWritComponent implements OnInit {
    * @returns boolean true if writ is valid, false otherwise
    */
   writIsValid(): boolean {
-    this.writToSubmit = {
-      is_jewelery: this.writType === 'Jewelery' ? true : false,
+    const writToSubmit = {
+      is_jewelery: this.writType === 'Jewelery',
       quality: this.quality,
       item: this.item,
       trait: this.trait,
       set: this.set,
-      style: this.style,
+      ...(this.writType !== 'Jewelery' && { style: this.style }),
       reward: this.reward,
     };
-    const validity = !Object.values(this.writToSubmit)
+
+    const validity = !Object.values(writToSubmit)
       .map((value) => isNil(value))
       .includes(true);
 
@@ -203,9 +182,6 @@ export class NewWritComponent implements OnInit {
       this.submittable = false;
     }
 
-    // console.log('validity: ', validity);
-    // console.log('this.writToSubmit: ', this.writToSubmit);
-
     return validity;
   }
 
@@ -214,10 +190,19 @@ export class NewWritComponent implements OnInit {
    * @returns
    */
   submitWrit(): void {
-    console.log('submitting writ: ', this.writToSubmit);
+    const writToSubmit = {
+      is_jewelery: this.writType === 'Jewelery',
+      quality: this.quality,
+      item: this.item,
+      trait: this.trait,
+      set: this.set,
+      ...(this.writType !== 'Jewelery' && { style: this.style }),
+      reward: this.reward,
+    };
+    console.log('submitting writ: ', writToSubmit);
     if (this.writIsValid()) {
       // make service call to submit writ
-      this.writs.create(this.writToSubmit).subscribe((data) => {
+      this.writs.create(writToSubmit).subscribe((data) => {
         console.log('data: ', data);
       });
       // subscribe to observable, and set this.submissionStatus to true or false

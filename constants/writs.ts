@@ -9,7 +9,7 @@ export interface writ {
   quality: item_quality;
   trait: all_traits_list;
   set: armor_sets;
-  style: styles;
+  style?: styles;
   reward: number;
 }
 
