@@ -23,7 +23,9 @@ export class TypeAheadComponent implements OnInit {
   @Input() options: string[];
   @Input() labeltext: string;
   @Input() disableFromParent: boolean;
-  @Input() selectedFromParent: boolean;
+  @Input() resetFromParent: boolean;
+  @Input() selectedFromParent: string;
+
   selected?: string;
   @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
 
@@ -35,14 +37,14 @@ export class TypeAheadComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     // Reset the selected property to an empty string
-    if (
-      changes['selectedFromParent'] &&
-      !changes['selectedFromParent'].firstChange
-    ) {
-      const selectedFromParent = changes['selectedFromParent'].currentValue;
-      if (!selectedFromParent) {
+    if (changes['resetFromParent'] && !changes['resetFromParent'].firstChange) {
+      const resetFromParent = changes['resetFromParent'].currentValue;
+      if (!resetFromParent) {
         this.selected = '';
       }
+    }
+    if (changes[`selectedFromParent`]) {
+      this.selected = this.selectedFromParent;
     }
   }
 

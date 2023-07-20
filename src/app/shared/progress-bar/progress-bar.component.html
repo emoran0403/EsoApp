@@ -1,0 +1,11 @@
+<div class="progress">
+  <div
+    class="progress-bar"
+    role="progressbar"
+    [ngClass]="getColorClass(percentage)"
+    [style.width.%]="percentage"
+    [attr.aria-valuenow]="percentage"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  ></div>
+</div>

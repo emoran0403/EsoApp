@@ -15,9 +15,10 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class UnlockButtonComponent implements OnInit {
   @Input() name: string; // Display for the header
-  @Input() positive: string; // Display for the affirmative option
-  @Input() negative: string; // Display for the negative option
-  @Input() optionFromParent: string | boolean; // Input for outside control
+  @Input() positive: string; // Affirmative option button text
+  @Input() negative: string; // Negative option button text
+  @Input() setOption: string | boolean; // Input for outside control
+  @Input() disabled: boolean; // Input to disable the radio buttons
   @Output() optionSelected: EventEmitter<[string, boolean]> =
     new EventEmitter();
   constructor(private readonly data: DataService) {}
@@ -27,14 +28,15 @@ export class UnlockButtonComponent implements OnInit {
   ngOnInit(): void {}
 
   choose(choice: boolean): void {
-    this.chosenOption = choice;
-    this.optionSelected.emit([this.name, choice]);
-    // console.log('choice: ', choice);
+    if (!this.disabled) {
+      this.chosenOption = choice;
+      this.optionSelected.emit([this.name, choice]);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['optionFromParent']) {
-      this.chosenOption = this.optionFromParent;
+    if (changes['setOption']) {
+      this.chosenOption = this.setOption;
       // console.log('this.selectedOption: ', this.chosenOption);
     }
     if (changes['name']) {

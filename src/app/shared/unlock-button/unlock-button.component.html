@@ -1,7 +1,8 @@
-<div class="card mb-3">
+<div class="card mb-3 setWidth">
   <div class="card-body">
     <h5 class="card-title text-center">{{ name }}</h5>
     <div class="d-flex justify-content-center">
+      <!-- Affirmative Option -->
       <div class="mx-2">
         <input
           type="radio"
@@ -12,6 +13,7 @@
           value="true"
           (change)="choose(true)"
           [checked]="chosenOption === true"
+          [disabled]="disabled"
         />
         <label
           class="btn btn-outline-success"
@@ -19,6 +21,7 @@
           >{{ positive }}</label
         >
       </div>
+      <!-- Negative Option -->
       <div class="mx-2">
         <input
           type="radio"
@@ -29,6 +32,7 @@
           value="false"
           (change)="choose(false)"
           [checked]="chosenOption === false"
+          [disabled]="disabled"
         />
         <label class="btn btn-outline-danger" for="{{ name }}-{{ negative }}">{{
           negative
