@@ -2,7 +2,10 @@
 <div class="container">
   <div class="row">
     <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-      <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+      <div
+        class="my-3 d-flex flex-row justify-content-around"
+        id="craftingTypeDropdownContainer"
+      >
         <select-dropdown
           class="col-3"
           [buttonText]="'Crafting'"
@@ -25,7 +28,10 @@
   <!-- Chosen Item -->
   <div class="row">
     <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-      <div class="my-3 d-flex flex-row justify-content-around" id="wow">
+      <div
+        class="my-3 d-flex flex-row justify-content-around"
+        id="chosenItemDropdownContainer"
+      >
         <select-dropdown
           class="col-3"
           [buttonText]="'Item'"
@@ -56,7 +62,7 @@
         [name]="tuple[0]"
         [positive]="'Learned'"
         [negative]="'Locked'"
-        [optionFromParent]="tuple[1]"
+        [setOption]="tuple[1]"
         (optionSelected)="onSingleTraitToggle($event)"
       ></unlock-button>
     </ng-container>

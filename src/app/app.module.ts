@@ -26,6 +26,7 @@ import {
 import { UnlockButtonComponent } from './shared/unlock-button/unlock-button.component';
 import { SelectDropdownComponent } from './shared/select-dropdown/select-dropdown.component';
 import { TypeAheadComponent } from './shared/type-ahead/type-ahead.component';
+import { ProgressBarComponent } from './shared/progress-bar/progress-bar.component';
 
 import { JsonPipe } from '@angular/common';
 
@@ -34,6 +35,7 @@ const SHARED_COMPONENTS = [
   UnlockButtonComponent,
   SelectDropdownComponent,
   TypeAheadComponent,
+  ProgressBarComponent,
 ];
 
 const CHILDREN_COMPONENTS = [

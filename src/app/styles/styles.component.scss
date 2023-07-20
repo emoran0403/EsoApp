@@ -1,0 +1,32 @@
+.fixed-height-container {
+  height: 15rem; /* Adjust the desired height */
+  overflow: auto;
+}
+
+.scrollable-content {
+  /* Optional: Add padding or margin if needed */
+  width: 10rem;
+}
+
+.setWidthA {
+  width: 15rem;
+}
+
+.setWidthB {
+  width: 8rem;
+}
+
+/* Red color when under 50% */
+.red {
+  background-color: red;
+}
+
+/* Yellow color at 50% to 75% */
+.yellow {
+  background-color: yellow;
+}
+
+/* Green color when 75% to 100% */
+.green {
+  background-color: green;
+}

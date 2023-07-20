@@ -65,7 +65,8 @@
               "browserTarget": "EsoApp:build:production"
             },
             "development": {
-              "browserTarget": "EsoApp:build:development"
+              "browserTarget": "EsoApp:build:development",
+              "disableHostCheck": true
             }
           },
           "defaultConfiguration": "development"

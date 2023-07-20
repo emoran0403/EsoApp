@@ -1,1 +1,97 @@
-<p>styles works!</p>
+<div class="container mt-3">
+  <!-- Style Type Ahead -->
+  <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3 pb-3">
+    <type-ahead
+      #typeaheadStyle
+      [labeltext]="'Style'"
+      [options]="styles"
+      [selectedFromParent]="selectedStyle"
+      (optionSelected)="setStyle($event)"
+    ></type-ahead>
+  </div>
+  <!-- Style List -->
+  <div class="container">
+    <div class="fixed-height-container">
+      <div class="scrollable-content">
+        <ng-container *ngFor="let style of styles">
+          <div class="mb-1">
+            <button class="btn btn-primary" (click)="setStyle(style)">
+              {{ style }}
+            </button>
+            <progress-bar [percentage]="100"></progress-bar>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <!-- Navigation -->
+  <div class="container">
+    <div class="row">
+      <div class="d-flex">
+        <button
+          class="btn btn-primary"
+          (click)="nextOrPrevStyle('prev')"
+          [disabled]="!hasSelectedStyle"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-caret-left-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"
+            />
+          </svg>
+          Previous
+        </button>
+        <div class="setWidthB">
+          <p>{{ selectedStyle }}</p>
+        </div>
+        <button
+          class="btn btn-primary"
+          (click)="nextOrPrevStyle('next')"
+          [disabled]="!hasSelectedStyle"
+        >
+          Next
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-caret-right-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unlocks -->
+  <div class="container">
+    <div class="d-flex flex-column">
+      <unlock-button
+        [name]="'Toggle All'"
+        [positive]="'Known'"
+        [negative]="'Unknown'"
+        [setOption]="allTraitsKnown"
+        [disabled]="!hasSelectedStyle"
+      ></unlock-button>
+
+      <ng-container *ngFor="let page of motifPages">
+        <unlock-button
+          [name]="page"
+          [positive]="'Known'"
+          [negative]="'Unknown'"
+          [disabled]="!hasSelectedStyle"
+        ></unlock-button>
+      </ng-container>
+    </div>
+  </div>
+</div>

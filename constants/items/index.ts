@@ -227,6 +227,22 @@ export type unlocks_list =
   | 'STAVES'
   | 'SWORDS';
 
+export type unlocks_list_for_display =
+  | 'Axes'
+  | 'Belts'
+  | 'Boots'
+  | 'Bows'
+  | 'Chests'
+  | 'Daggers'
+  | 'Gloves'
+  | 'Helmets'
+  | 'Legs'
+  | 'Mamces'
+  | 'Shields'
+  | 'Shoulders'
+  | 'Staves'
+  | 'Swords';
+
 export const UNLOCKS_LIST: unlocks_list[] = [
   'AXES',
   'BELTS',
@@ -242,6 +258,23 @@ export const UNLOCKS_LIST: unlocks_list[] = [
   'SHOULDERS',
   'STAVES',
   'SWORDS',
+];
+
+export const UNLOCKS_LIST_FOR_DISPLAY: unlocks_list_for_display[] = [
+  'Axes',
+  'Belts',
+  'Boots',
+  'Bows',
+  'Chests',
+  'Daggers',
+  'Gloves',
+  'Helmets',
+  'Legs',
+  'Mamces',
+  'Shields',
+  'Shoulders',
+  'Staves',
+  'Swords',
 ];
 
 export type axes = 'Battle Axe' | 'Axe';

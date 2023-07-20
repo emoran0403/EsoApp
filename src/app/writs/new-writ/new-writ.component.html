@@ -58,7 +58,7 @@
         #typeaheadSet
         [labeltext]="'Set'"
         [options]="armorSets"
-        [selectedFromParent]="resetterForTypeahead"
+        [resetFromParent]="resetterForTypeahead"
         (optionSelected)="handleSetChange($event)"
         (click)="onInputClick('set')"
       ></type-ahead>
@@ -75,7 +75,7 @@
         [labeltext]="'Style'"
         [options]="styles"
         [disableFromParent]="showStyle"
-        [selectedFromParent]="resetterForTypeahead"
+        [resetFromParent]="resetterForTypeahead"
         (optionSelected)="handleStyleChange($event)"
         (click)="onInputClick('style')"
       ></type-ahead>

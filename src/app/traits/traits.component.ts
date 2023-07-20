@@ -23,10 +23,12 @@ export class TraitsComponent implements OnInit {
     private readonly data: DataService
   ) {}
 
+  // Trait Options
   readonly weaponTraits = WEAPON_TRAITS;
   readonly armorTraits = ARMOR_TRAITS;
   readonly jeweleryTraits = JEWELERY_TRAITS;
 
+  // Options for item drop down
   readonly metalWeapons = METAL_WEAPONS;
   readonly metalArmor = METAL_APPAREL;
   readonly clothingArmor = CLOTHING_ITEMS_ARR;
