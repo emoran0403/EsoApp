@@ -6,7 +6,7 @@
       [labeltext]="'Style'"
       [options]="styles"
       [selectedFromParent]="selectedStyle"
-      (optionSelected)="setStyle($event)"
+      (optionSelected)="handleStyleButtonClick($event)"
     ></type-ahead>
   </div>
   <!-- Style List -->
@@ -15,10 +15,13 @@
       <div class="scrollable-content">
         <ng-container *ngFor="let style of styles">
           <div class="mb-1">
-            <button class="btn btn-primary" (click)="setStyle(style)">
+            <button
+              class="btn btn-primary"
+              (click)="handleStyleButtonClick(style)"
+            >
               {{ style }}
             </button>
-            <progress-bar [percentage]="100"></progress-bar>
+            <!-- <progress-bar [percentage]="100"></progress-bar> -->
           </div>
         </ng-container>
       </div>
@@ -80,16 +83,19 @@
         [name]="'Toggle All'"
         [positive]="'Known'"
         [negative]="'Unknown'"
-        [setOption]="allTraitsKnown"
+        [setOption]="hasAllUnlocks"
         [disabled]="!hasSelectedStyle"
+        (optionSelected)="handleToggleAll($event)"
       ></unlock-button>
 
-      <ng-container *ngFor="let page of motifPages">
+      <ng-container *ngFor="let unlock of unlocksForButtons">
         <unlock-button
-          [name]="page"
+          [name]="unlock[0]"
+          [setOption]="unlock[1]"
           [positive]="'Known'"
           [negative]="'Unknown'"
           [disabled]="!hasSelectedStyle"
+          (optionSelected)="handleToggleUnlock($event)"
         ></unlock-button>
       </ng-container>
     </div>

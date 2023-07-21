@@ -45,7 +45,7 @@ export const STYLE_INFO: style_info[] = [
     motif: 'Crafting Motif 7: Khajiit Style',
   },
   {
-    style: 'Orcish',
+    style: 'Orc',
     material: 'Manganese',
     motif: 'Crafting Motif 8: Orc Style',
   },
@@ -205,7 +205,7 @@ export const STYLE_INFO: style_info[] = [
     motif: 'Crafting Motif 39: Minotaur Style',
   },
   {
-    style: 'Order of the Hour',
+    style: 'Order Hour',
     material: 'Pearl Sand',
     motif: 'Crafting Motif 40: Order Hour Style',
   },
@@ -235,7 +235,7 @@ export const STYLE_INFO: style_info[] = [
     motif: 'Crafting Motif 45: Mazzatun Style',
   },
   {
-    style: 'Stalhrim Frostcaster',
+    style: 'Frostcaster',
     material: 'Stalhrim Shard',
     motif: 'Crafting Motif 46: Frostcaster Style',
   },

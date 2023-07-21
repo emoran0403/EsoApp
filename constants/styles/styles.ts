@@ -6,7 +6,7 @@ export const STYLES: styles[] = [
   'Breton',
   'Redguard',
   'Khajiit',
-  'Orcish',
+  'Orc',
   'Argonian',
   'Imperial',
   'Ancient Elf',
@@ -38,13 +38,13 @@ export const STYLES: styles[] = [
   'Ebony',
   'Draugr',
   'Minotaur',
-  'Order of the Hour',
+  'Order Hour',
   'Celestial',
   'Hollowjack',
   'Grim Harlequin',
   'Silken Ring',
   'Mazzatun',
-  'Stalhrim Frostcaster',
+  'Frostcaster',
   'Buoyant Armiger',
   'Ashlander',
   'Militant Ordinator',
@@ -122,7 +122,7 @@ export type styles =
   | 'Breton'
   | 'Redguard'
   | 'Khajiit'
-  | 'Orcish'
+  | 'Orc'
   | 'Argonian'
   | 'Imperial'
   | 'Ancient Elf'
@@ -154,13 +154,13 @@ export type styles =
   | 'Ebony'
   | 'Draugr'
   | 'Minotaur'
-  | 'Order of the Hour'
+  | 'Order Hour'
   | 'Celestial'
   | 'Hollowjack'
   | 'Grim Harlequin'
   | 'Silken Ring'
   | 'Mazzatun'
-  | 'Stalhrim Frostcaster'
+  | 'Frostcaster'
   | 'Buoyant Armiger'
   | 'Ashlander'
   | 'Militant Ordinator'

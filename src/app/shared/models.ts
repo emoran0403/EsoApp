@@ -146,3 +146,21 @@ export type all_items_list =
   | clothing_items
   | wood_items
   | jewelery_items;
+
+export interface motif_status {
+  axes: boolean;
+  belts: boolean;
+  boots: boolean;
+  bows: boolean;
+  chests: boolean;
+  daggers: boolean;
+  gloves: boolean;
+  helmets: boolean;
+  legs: boolean;
+  maces: boolean;
+  shields: boolean;
+  shoulders: boolean;
+  staves: boolean;
+  swords: boolean;
+  count: number;
+}

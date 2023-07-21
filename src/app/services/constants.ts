@@ -4,25 +4,22 @@ const APP = 'esoapp';
 
 export const URLS = {
   traits: {
-    getAll: `${BASE_URL}/${ENV}/${APP}/traits/all`,
-    updateOne: `${BASE_URL}/${ENV}/${APP}/traits/update`,
-    generate: `${BASE_URL}/${ENV}/${APP}/traits/generate`,
-    fill: `${BASE_URL}/${ENV}/${APP}/traits/fill`,
+    getOne: `${BASE_URL}/${ENV}/${APP}/traits/singleTrait`,
+    getAll: `${BASE_URL}/${ENV}/${APP}/traits/allTraits`,
+    updateOne: `${BASE_URL}/${ENV}/${APP}/traits/updateTrait`,
   },
   writs: {
     getAll: `${BASE_URL}/${ENV}/${APP}/writs/all`,
+    delete: `${BASE_URL}/${ENV}/${APP}/writs/delete`,
     updateOne: `${BASE_URL}/${ENV}/${APP}/writs/update`,
     createOne: `${BASE_URL}/${ENV}/${APP}/writs/new`,
     generate: `${BASE_URL}/${ENV}/${APP}/writs/generate`,
   },
   styles: {
-    getAll: `${BASE_URL}/${ENV}/${APP}/styles/all`,
-    getOne: `${BASE_URL}/${ENV}/${APP}/styles/one`,
-    updateOne: `${BASE_URL}/${ENV}/${APP}/styles/update`,
-    updateMany: `${BASE_URL}/${ENV}/${APP}/styles/update`,
-    addNew: `${BASE_URL}/${ENV}/${APP}/styles/new`,
-    generate: `${BASE_URL}/${ENV}/${APP}/styles/generate`,
-    fill: `${BASE_URL}/${ENV}/${APP}/styles/fill`,
+    getOne: `${BASE_URL}/${ENV}/${APP}/styles/singleStyle`,
+    getAllByItems: `${BASE_URL}/${ENV}/${APP}/styles/allItemStyles`,
+    getAllByMotif: `${BASE_URL}/${ENV}/${APP}/styles/allMotifStyles`,
+    updateOne: `${BASE_URL}/${ENV}/${APP}/styles/updateStyle`,
   },
   auth: {
     getOne: `${BASE_URL}/${ENV}/${APP}/users/one`,

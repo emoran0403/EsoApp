@@ -237,7 +237,7 @@ export type unlocks_list_for_display =
   | 'Gloves'
   | 'Helmets'
   | 'Legs'
-  | 'Mamces'
+  | 'Maces'
   | 'Shields'
   | 'Shoulders'
   | 'Staves'
@@ -270,7 +270,7 @@ export const UNLOCKS_LIST_FOR_DISPLAY: unlocks_list_for_display[] = [
   'Gloves',
   'Helmets',
   'Legs',
-  'Mamces',
+  'Maces',
   'Shields',
   'Shoulders',
   'Staves',
