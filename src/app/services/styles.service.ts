@@ -39,4 +39,17 @@ export class StylesService {
 
     return this.http.put(URLS.styles.updateOne, body, { headers });
   }
+
+  updateMultipleStyles(motif_name: string, value: boolean): Observable<Object> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const body = {
+      motif_name,
+      value,
+      player_uuid: '69',
+    };
+
+    return this.http.put(URLS.styles.updateMultiple, body, { headers });
+  }
 }

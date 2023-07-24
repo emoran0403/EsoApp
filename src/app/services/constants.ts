@@ -20,6 +20,7 @@ export const URLS = {
     getAllByItems: `${BASE_URL}/${ENV}/${APP}/styles/allItemStyles`,
     getAllByMotif: `${BASE_URL}/${ENV}/${APP}/styles/allMotifStyles`,
     updateOne: `${BASE_URL}/${ENV}/${APP}/styles/updateStyle`,
+    updateMultiple: `${BASE_URL}/${ENV}/${APP}/styles/updateMultipleStyles`,
   },
   auth: {
     getOne: `${BASE_URL}/${ENV}/${APP}/users/one`,
