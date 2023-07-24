@@ -37,9 +37,12 @@ export class TraitsComponent implements OnInit {
   readonly jeweleryItems = JEWELERY_ITEMS_ARR;
 
   selectedCraftingType: string = 'Blacksmithing - Weapons'; // Crafting type which determines the items to show
-  craftingTypeIndex: number = 0;
+  craftingTypeIndex: number = 0; // The current index of crafting types
+
   shownItems: all_items_list[] = this.metalWeapons; // The array of items to display and set traits on
-  // chosenItem: all_items_list; // Item the user has chosen to toggle traits on
+  selectedItem: all_items_list = this.metalWeapons[0]; // Item the user has chosen to toggle traits on
+  shownItemsIndex: number = 0; // The current index of shown items
+
   // shownTraits: all_trait_options; // The traits that are shown based on chosenCraftingType
   // itemForButtons: [string, boolean][]; // chosenItem with the items traits on it
 
@@ -60,6 +63,9 @@ export class TraitsComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Sets the shown items based on the craftingTypeIndex.
+   */
   setShownItems(): void {
     switch (this.craftingTypeIndex) {
       case 0:
@@ -84,17 +90,31 @@ export class TraitsComponent implements OnInit {
   }
 
   /**
-   * Helper function to set the selectedCraftingType based on the current craftingTypeIndex
+   * Helper function to set the selectedCraftingType based on the current craftingTypeIndex.
    */
   setCraftingTypeByIndex(): void {
     this.selectedCraftingType = this.craftingTypes[`${this.craftingTypeIndex}`];
   }
 
   /**
+   * Helper function to set the selectedItem based on the current shownItemsIndex.
+   */
+  setItemByIndex(): void {
+    this.selectedItem = this.shownItems[`${this.shownItemsIndex}`];
+  }
+
+  /**
+   * Helper function to set the shownItemsIndex to 0.
+   */
+  resetShownItemIndex(): void {
+    this.shownItemsIndex = 0;
+  }
+
+  /**
    * Sets craftingTypeIndex based on the given direction, loops back around from either direction.
    * @param direction The direction along the craftingTypes array to travel.
    */
-  handleLooping(direction: 'next' | 'prev'): void {
+  handleLoopingInCraftingType(direction: 'next' | 'prev'): void {
     if (direction === 'next') {
       if (this.craftingTypeIndex + 1 > this.craftingTypes.length - 1) {
         this.craftingTypeIndex = 0;
@@ -110,10 +130,47 @@ export class TraitsComponent implements OnInit {
     }
   }
 
+  /**
+   * Sets craftingTypeIndex based on the given direction, loops back around from either direction.
+   * @param direction The direction along the craftingTypes array to travel.
+   */
+  handleLoopingInItem(direction: 'next' | 'prev'): void {
+    if (direction === 'next') {
+      if (this.shownItemsIndex + 1 > this.shownItems.length - 1) {
+        this.shownItemsIndex = 0;
+      } else {
+        this.shownItemsIndex++;
+      }
+    } else {
+      if (this.shownItemsIndex - 1 < 0) {
+        this.shownItemsIndex = this.shownItems.length - 1;
+      } else {
+        this.shownItemsIndex--;
+      }
+    }
+  }
+
+  /**
+   * Changes the chosen crafting type.
+   * @param direction The direction through the crafting type options to travel.
+   */
   nextOrPrevCraftingType(direction: 'next' | 'prev'): void {
-    this.handleLooping(direction);
+    // Handle Crafting type changes
+    this.handleLoopingInCraftingType(direction);
     this.setCraftingTypeByIndex();
-    // this.getUnlocksForSelectedStyle(this.selectedStyle);
-    // this.scrollIntoView(this.selectedStyle);
+
+    // Handle item changes
+    this.resetShownItemIndex();
+    this.setShownItems();
+    this.setItemByIndex();
+  }
+
+  /**
+   * Changes the chosen item
+   * @param direction The direction through the shownItems array to travel.
+   */
+  nextOrPrevItem(direction: 'next' | 'prev'): void {
+    this.handleLoopingInItem(direction);
+    this.setItemByIndex();
   }
 }
