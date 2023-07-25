@@ -14,24 +14,18 @@ export class TraitsService {
     private readonly data: DataService
   ) {}
 
-  getAllTraits(): Observable<any> {
+  getAllTraits(item: string, crafting_type: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       player_uuid: '69',
+      item,
+      crafting_type,
     });
 
-    return this.http.get(URLS.traits.getAll, { headers }).pipe(
-      map((res: any) => {
-        return this.data.formatTraits(res);
-      })
-    );
+    return this.http.get(URLS.traits.getAll, { headers });
   }
 
-  updateOneTrait(
-    item: string,
-    trait: string,
-    completion: boolean
-  ): Observable<any> {
+  updateOneTrait(item: string, trait: string, value: boolean): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       player_uuid: '69',
@@ -40,7 +34,7 @@ export class TraitsService {
       player_uuid: '69',
       item,
       trait,
-      completion,
+      value,
     };
 
     const stringifiedBody = JSON.stringify(body);
