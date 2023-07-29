@@ -13,6 +13,8 @@ import { JEWELERY_ITEMS_ARR } from 'constants/items';
 import { all_items_list, all_trait_options, item } from '../shared/models';
 import { DataService } from '../services/data.service';
 import { CRATFING_TYPES } from '../shared/constants';
+import { Dictionary, cloneDeep, map, mapKeys } from 'lodash';
+import { switchMap, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-traits',
@@ -52,12 +54,15 @@ export class TraitsComponent implements OnInit {
   shownTraits: all_traits_list[] = this.weaponTraits; // The traits that are shown
   unlocksForButtons: any[]; // Array of unlocks with their values
 
-  selectedTraitUnlocks;
-  hasAllUnlocks: boolean = false; // Boolean value indicating whether all the traits are unlocked
+  selectedTraitUnlocks: [string, boolean][]; // Tuple array pairing a trait with its unlock status
+  hasAllUnlocks: boolean; // Boolean value indicating whether all the traits are unlocked
+  unlockCount: number; // Number of traits learned on the item
 
   ngOnInit(): void {
-    this.getUnlocksForSelectedTrait();
+    this.fetchSelectedTraitData(this.selectedItem);
   }
+
+  //* Nav buttons helpers and setters ***********************************************************
 
   /**
    * Sets the shown items based on the craftingTypeIndex.
@@ -95,7 +100,7 @@ export class TraitsComponent implements OnInit {
   /**
    * Helper function to set the selectedItem based on the current shownItemsIndex.
    */
-  setItemByIndex(): void {
+  setSelectedItemByIndex(): void {
     this.selectedItem = this.shownItems[`${this.shownItemsIndex}`];
   }
 
@@ -103,7 +108,7 @@ export class TraitsComponent implements OnInit {
    * Helper function to set the shownTraits based on selectedCraftingType.
    * Also sets the crafting type as the server expects it.
    */
-  setTraits(): void {
+  setShownTraits(): void {
     switch (this.selectedCraftingType) {
       case 'Blacksmithing - Armor':
       case 'Woodworking - Armor':
@@ -120,28 +125,6 @@ export class TraitsComponent implements OnInit {
         this.shownTraits = this.jeweleryTraits;
         this.craftingTypeForService = 'jewelery';
         break;
-    }
-  }
-
-  /**
-   * Sets hasAllUnlocks to be the specified value.
-   * @param value Value to set hasAllUnlocks to.
-   */
-  setToggleAll(value: boolean): void {
-    console.log('setToggleAll - value: ', value);
-
-    this.hasAllUnlocks = value;
-    console.log('setToggleAll - this.hasAllUnlocks: ', this.hasAllUnlocks);
-  }
-
-  /**
-   * Sets hasAllUnlocks if the player has all 9 unlocks.
-   */
-  checkToggleAll(): void {
-    if (this.selectedTraitUnlocks.count === 9) {
-      this.hasAllUnlocks = true;
-    } else {
-      this.hasAllUnlocks = false;
     }
   }
 
@@ -204,11 +187,11 @@ export class TraitsComponent implements OnInit {
     // Handle item changes
     this.resetShownItemIndex();
     this.setShownItems();
-    this.setItemByIndex();
+    this.setSelectedItemByIndex();
 
     // Handle trait changes
-    this.setTraits();
-    this.getUnlocksForSelectedTrait();
+    this.setShownTraits();
+    this.fetchSelectedTraitData(this.selectedItem);
   }
 
   /**
@@ -217,66 +200,56 @@ export class TraitsComponent implements OnInit {
    */
   nextOrPrevItem(direction: 'next' | 'prev'): void {
     this.handleLoopingInItem(direction);
-    this.setItemByIndex();
-    this.getUnlocksForSelectedTrait();
+    this.setSelectedItemByIndex();
+    this.fetchSelectedTraitData(this.selectedItem);
   }
 
-  /**
-   * Transforms the incoming unlock data so that it may be iterated over for the unlock buttons.
-   */
-  setUnlocksFromDB(): void {
-    const unlocksCopy = { ...this.selectedTraitUnlocks };
-    delete unlocksCopy.count;
-    this.unlocksForButtons = Object.entries(unlocksCopy);
-  }
+  //* Trait buttons fetch and update ***********************************************************
 
-  /**
-   * Makes a service call to get the unlocks for the selected trait.
-   * Sets the toggle all button.
-   * Sets the individual unlock buttons.
-   * @param trait The trait to get the unlocks for.
-   */
-  getUnlocksForSelectedTrait(): void {
+  processApiResponse = (res: any): [string, boolean][] => {
+    if (res[0].count === 9) this.hasAllUnlocks = true;
+    else this.hasAllUnlocks = false;
+
+    delete res[0].count;
+    this.selectedTraitUnlocks = this.data.makeCapitalizedTupleArray(res[0]);
+    return this.selectedTraitUnlocks;
+  };
+
+  // Function to fetch the selected trait data (for ngOnInit and when user selects a new item)
+  fetchSelectedTraitData(item: string): void {
     this.traitsService
-      .getAllTraits(this.selectedItem, this.craftingTypeForService)
-      .subscribe((res) => {
-        this.selectedTraitUnlocks = res[0];
-        this.checkToggleAll();
-        this.setUnlocksFromDB();
-        console.log('this.selectedTraitUnlocks: ', this.selectedTraitUnlocks);
-        console.log('this.selectedItem: ', this.selectedItem);
-      });
+      .getAllTraits(item)
+      .pipe(switchMap((res) => this.processApiResponse(res)))
+      .subscribe();
   }
 
-  /**
-   * Event handler for toggling all unlocks.
-   * !Makes service call for all unlocks.
-   * !Sets toggle all to given value.
-   * !Sets individual unlocks to given value.
-   * @param $event
-   */
-  handleToggleAll($event: [string, boolean]): void {
-    console.log('handleToggleAll - $event: ', $event);
+  // Update a single trait.
+  updateAndSetSingleTraitData(
+    item: string,
+    trait: string,
+    value: boolean
+  ): void {
+    this.traitsService
+      .updateOneTrait(item, trait, value)
+      .pipe(switchMap((res) => this.processApiResponse(res)))
+      .subscribe();
   }
 
-  /**
-   * Event handler for toggling a single unlock.
-   * !Makes service call for single unlock.
-   * !If set to false, will also set the toggle all to false
-   * @param $event
-   */
-  handleToggleUnlock($event: [string, boolean]): void {
+  // Update multiple traits.
+  updateAndSetMultipleTraitData(value: boolean): void {
+    this.traitsService
+      .updateMultileTraits(this.selectedItem, value)
+      .pipe(switchMap((res) => this.processApiResponse(res)))
+      .subscribe();
+  }
+
+  // Calls the appropriate update method based on the given button press.
+  handleToggleButtons($event: [string, boolean], btn: 'all' | 'one'): void {
     const [trait, value] = $event;
-    console.log('handleToggleUnlock - value: ', value);
-
-    if (!value) {
-      this.setToggleAll(value);
+    if (btn === 'all') {
+      this.updateAndSetMultipleTraitData(value);
+    } else {
+      this.updateAndSetSingleTraitData(this.selectedItem, trait, value);
     }
-
-    this.traitsService
-      .updateOneTrait(this.selectedItem, trait, value)
-      .subscribe((response) => {
-        console.log('Response: ', response);
-      });
   }
 }

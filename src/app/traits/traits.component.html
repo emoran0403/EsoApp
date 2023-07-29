@@ -92,16 +92,16 @@
       [positive]="'Known'"
       [negative]="'Unknown'"
       [setOption]="hasAllUnlocks"
-      (optionSelected)="handleToggleAll($event)"
+      (optionSelected)="handleToggleButtons($event, 'all')"
     ></unlock-button>
 
-    <ng-container *ngFor="let unlock of unlocksForButtons">
+    <ng-container *ngFor="let unlock of selectedTraitUnlocks">
       <unlock-button
         [name]="unlock[0]"
         [setOption]="unlock[1]"
         [positive]="'Known'"
         [negative]="'Unknown'"
-        (optionSelected)="handleToggleUnlock($event)"
+        (optionSelected)="handleToggleButtons($event, 'one')"
       ></unlock-button>
     </ng-container>
   </div>

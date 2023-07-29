@@ -7,6 +7,7 @@ export const URLS = {
     getOne: `${BASE_URL}/${ENV}/${APP}/traits/singleTrait`,
     getAll: `${BASE_URL}/${ENV}/${APP}/traits/allTraits`,
     updateOne: `${BASE_URL}/${ENV}/${APP}/traits/updateTrait`,
+    updateMultiple: `${BASE_URL}/${ENV}/${APP}/traits/updateMultipleTraits`,
   },
   writs: {
     getAll: `${BASE_URL}/${ENV}/${APP}/writs/all`,

@@ -14,12 +14,12 @@ export class TraitsService {
     private readonly data: DataService
   ) {}
 
-  getAllTraits(item: string, crafting_type: string): Observable<any> {
+  getAllTraits(item: string): Observable<any> {
+    console.log('getAllTraits - item: ', item);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       player_uuid: '69',
       item,
-      crafting_type,
     });
 
     return this.http.get(URLS.traits.getAll, { headers });
@@ -41,5 +41,21 @@ export class TraitsService {
     // console.log('raw body from service: ', body);
     // console.log('stringifiedBody from service: ', stringifiedBody);
     return this.http.put(URLS.traits.updateOne, stringifiedBody, { headers });
+  }
+
+  updateMultileTraits(item: string, value: boolean): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      player_uuid: '69',
+    });
+    const body = {
+      player_uuid: '69',
+      item,
+      value,
+    };
+    const stringifiedBody = JSON.stringify(body);
+    return this.http.put(URLS.traits.updateMultiple, stringifiedBody, {
+      headers,
+    });
   }
 }

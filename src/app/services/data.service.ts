@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { chain, size, forEach } from 'lodash';
+import { chain, size, forEach, mapKeys, Dictionary } from 'lodash';
 import { any_trait, item } from '../shared/models';
 
 @Injectable({
@@ -69,7 +69,24 @@ export class DataService {
     return Object.entries(obj);
   }
 
+  makeCapitalizedTupleArray(obj: Record<string, boolean>): [string, boolean][] {
+    return Object.entries(obj).map(([key, value]) => [
+      this.capitalizeFirstLetter(key),
+      value,
+    ]);
+  }
+
   capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  formatObjectWithCapitalizedKeys(dataObject: {
+    [key: string]: boolean | number;
+  }): { [key: string]: boolean | number } {
+    const formattedData = mapKeys(dataObject, (_, key) => ({
+      [this.capitalizeFirstLetter(key)]: dataObject[key],
+    })) as Dictionary<boolean | number>;
+
+    return formattedData;
   }
 }
