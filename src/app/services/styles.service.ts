@@ -21,7 +21,7 @@ export class StylesService {
     return this.http.get<motif_status>(URLS.styles.getAllByMotif, { headers });
   }
 
-  updateStyle(
+  updateOneStyle(
     item: string,
     motif_name: string,
     value: boolean

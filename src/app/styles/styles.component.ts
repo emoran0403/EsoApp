@@ -9,6 +9,8 @@ import { UNLOCKS_LIST_FOR_DISPLAY } from 'constants/items';
 import { STYLES, styles } from 'constants/styles/styles';
 import { StylesService } from '../services/styles.service';
 import { motif_status } from '../shared/models';
+import { DataService } from '../services/data.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-styles',
@@ -19,97 +21,48 @@ export class StylesComponent implements OnInit, AfterViewInit {
   @ViewChild('stylesWindow', { static: true }) stylesWindow!: ElementRef;
   constructor(
     private readonly styleService: StylesService,
-    private elementRef: ElementRef
+    private readonly data: DataService
   ) {}
 
   readonly motifPages = UNLOCKS_LIST_FOR_DISPLAY;
   readonly styles = STYLES;
 
-  selectedStyle: styles; // The chosen style
-  styleIndex: number; // The Index of the chosen style
+  selectedStyle: styles = 'High Elf'; // The chosen style
+  styleIndex: number = 0; // The Index of the chosen style
   unlocksForButtons: any[]; // Array of unlocks with their values
 
   selectedStyleUnlocks: motif_status; // The status of unlocks in the selected style
-  hasAllUnlocks: boolean = false; // Sets the option for the toggle all button
+  hasAllUnlocks: boolean; // Sets the option for the toggle all button
 
-  // Display booleans
-  hasSelectedStyle: boolean = false; //  Disables the toggle all and pages buttons when a style has not been selected
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchSelectedStyleData();
+  }
 
   ngAfterViewInit(): void {
     // Code to scroll to the element after view initialization
     this.scrollIntoView(this.selectedStyle);
   }
 
-  /**
-   * Helper function to set the selected style.
-   * @param style
-   */
+  //* Nav buttons helpers and setters ***********************************************************
+
+  // Set selectedStyle by given style.
   setStyleByStyle(style: any): void {
     this.selectedStyle = style as styles;
   }
 
-  /**
-   * Helper function to set the selected style via index.
-   * @param index
-   */
+  // Set selectedStyle by index.
   setStyleByIndex(index: number): void {
     this.selectedStyle = this.styles[index];
   }
 
-  /**
-   * Helper function to set the index of the selected style.
-   * @param style
-   */
+  // Set styleIndex.
   setStyleIndexByStyle(style: any): void {
     this.styleIndex = this.styles.indexOf(style);
   }
 
   /**
-   * Transforms the incoming unlock data so that it may be iterated over for the unlock buttons.
-   */
-  setUnlocksFromDB(): void {
-    const unlocksCopy = { ...this.selectedStyleUnlocks };
-    delete unlocksCopy.count;
-    this.unlocksForButtons = Object.entries(unlocksCopy);
-  }
-
-  /**
-   * Transforms the incoming unlock data values to match the parameter value.
-   * @param value
-   */
-  setUnlocksFromToggleAll(value: boolean): void {
-    const unlocksCopy = { ...this.selectedStyleUnlocks };
-    delete unlocksCopy.count;
-    const updatedUnlocks = Object.fromEntries(
-      Object.entries(unlocksCopy).map(([key]) => [key, value])
-    );
-    this.unlocksForButtons = Object.entries(updatedUnlocks);
-  }
-
-  /**
-   * Sets hasAllUnlocks to be the specified value.
-   * @param value Value to set hasAllUnlocks to.
-   */
-  setToggleAll(value: boolean): void {
-    this.hasAllUnlocks = value;
-  }
-
-  /**
-   * Sets hasAllUnlocks if the player has all 14 unlocks.
-   */
-  checkToggleAll(): void {
-    if (this.selectedStyleUnlocks.count === 14) {
-      this.hasAllUnlocks = true;
-    } else {
-      this.hasAllUnlocks = false;
-    }
-  }
-
-  /**
    * Helper function to prevent out of bounds on the styles array.
-   * @returns Boolean describing if the next index would be out of bounds
+   * @returns True if next index would be out of bounds, false otherwise.
    */
   preventOutOfBounds(direction: 'next' | 'prev'): boolean {
     if (direction === 'next' && this.styleIndex + 1 > this.styles.length - 1)
@@ -118,20 +71,13 @@ export class StylesComponent implements OnInit, AfterViewInit {
     return false;
   }
 
-  /**
-   * Creates valid IDs for the style buttons.
-   * @param style
-   * @returns
-   */
+  // Creates valid IDs for style buttons.
   sanitizeStyleId(style: string): string {
     const sanitizedStyle = style.replace(/[^a-zA-Z0-9-_]/g, '_');
     return `styleButton-${sanitizedStyle}`;
   }
 
-  /**
-   * Scrolls the given style button into view.
-   * @param style
-   */
+  // Scrolls the given style button into view.
   scrollIntoView(style: any): void {
     const styleButtonId = `styleButton-${style.replace(
       /[^a-zA-Z0-9-_]/g,
@@ -147,11 +93,8 @@ export class StylesComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Associated with next and previous buttons.
-   * Sets the selected style.
-   * Sets the index of the selected style.
-   * Sets button states via getUnlocksForSelectedStyle.
-   * @param direction
+   * Navigates through the styles array, sets the style index, gets the style's data, and scrolls the style button into view.
+   * @param direction Direction to navigate.
    */
   nextOrPrevStyle(direction: 'next' | 'prev'): void {
     if (this.preventOutOfBounds(direction)) return;
@@ -159,74 +102,64 @@ export class StylesComponent implements OnInit, AfterViewInit {
     else this.styleIndex--;
 
     this.setStyleByIndex(this.styleIndex);
-    this.getUnlocksForSelectedStyle(this.selectedStyle);
+    this.fetchSelectedStyleData();
     this.scrollIntoView(this.selectedStyle);
   }
 
   /**
-   * Makes a service call to get the unlocks for the selected style.
-   * Sets the toggle all button.
-   * Sets the individual unlock buttons.
-   * @param style The style to get the unlocks for.
-   */
-  getUnlocksForSelectedStyle(style: any): void {
-    this.styleService.getAllByMotif(style).subscribe((res) => {
-      this.selectedStyleUnlocks = res[0];
-      this.checkToggleAll();
-      this.setUnlocksFromDB();
-      console.log('this.selectedStyleUnlocks', this.selectedStyleUnlocks);
-    });
-  }
-
-  /**
-   * Associated with Style Buttons.
-   * Sets the selected style.
-   * Sets the index of the selected style.
-   * Makes a service call to get the unlocks associated with the style.
-   * @param style The chosen style
+   * Sets the selected style and index, gets the style's data, and scrolls the style button into view.
    */
   handleStyleButtonClick(style: any): void {
     console.log('handleStyleButtonClick called with style:', style);
-    this.hasSelectedStyle = true;
     this.setStyleByStyle(style);
     this.setStyleIndexByStyle(style);
-    this.getUnlocksForSelectedStyle(style);
+    this.fetchSelectedStyleData();
     this.scrollIntoView(style);
   }
 
-  /**
-   * Event handler for toggling all unlocks.
-   * Makes service call for all unlocks.
-   * Sets toggle all to given value.
-   * Sets individual unlocks to given value.
-   * @param $event
-   */
-  handleToggleAll($event: [string, boolean]): void {
-    const [item, value] = $event;
+  //* Style buttons fetch and update ***********************************************************
+
+  processApiResponse = (res: any): [string, boolean][] => {
+    console.log('processApiResponse - res: ', res);
+    if (res[0].count === 14) this.hasAllUnlocks = true;
+    else this.hasAllUnlocks = false;
+
+    delete res[0].count;
+    this.unlocksForButtons = this.data.makeCapitalizedTupleArray(res[0]);
+    return this.unlocksForButtons;
+  };
+
+  // Function to fetch the selected style data (for ngOnInit and when user selects a new item)
+  fetchSelectedStyleData(): void {
     this.styleService
-      .updateMultipleStyles(this.selectedStyle, value)
-      .subscribe((response) => {
-        console.log('Response: ', response);
-      });
-    this.setUnlocksFromToggleAll(value);
-    this.setToggleAll(value);
+      .getAllByMotif(this.selectedStyle)
+      .pipe(switchMap((res) => this.processApiResponse(res)))
+      .subscribe();
   }
 
-  /**
-   * Event handler for toggling a single unlock.
-   * Makes service call for single unlock.
-   * If set to false, will also set the toggle all to false
-   * @param $event
-   */
-  handleToggleUnlock($event: [string, boolean]): void {
-    const [item, value] = $event;
+  // Update a single style.
+  updateAndSetSingleStyleData(item: string, value: boolean): void {
     this.styleService
-      .updateStyle(item, this.selectedStyle, value)
-      .subscribe((response) => {
-        console.log('Response: ', response);
-      });
-    if (!value) {
-      this.setToggleAll(value);
+      .updateOneStyle(item, this.selectedStyle, value)
+      .pipe(switchMap((res) => this.processApiResponse(res)))
+      .subscribe();
+  }
+
+  // Update multiple styles.
+  updateAndSetMultipleStyleData(value: boolean): void {
+    this.styleService
+      .updateMultipleStyles(this.selectedStyle, value)
+      .pipe(switchMap((res) => this.processApiResponse(res)))
+      .subscribe();
+  }
+
+  // Calls the appropriate update method based on the given button press.
+  handleToggleButtons($event: [string, boolean], btn: 'all' | 'one'): void {
+    const [trait, value] = $event;
+    if (btn === 'all') {
+      this.updateAndSetMultipleStyleData(value);
+    } else {
+      this.updateAndSetSingleStyleData(trait, value);
     }
   }
 }

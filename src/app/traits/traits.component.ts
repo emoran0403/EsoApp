@@ -10,11 +10,10 @@ import {
 } from 'constants/traits/traits';
 import { TraitsService } from '../services/traits.service';
 import { JEWELERY_ITEMS_ARR } from 'constants/items';
-import { all_items_list, all_trait_options, item } from '../shared/models';
+import { all_items_list } from '../shared/models';
 import { DataService } from '../services/data.service';
 import { CRATFING_TYPES } from '../shared/constants';
-import { Dictionary, cloneDeep, map, mapKeys } from 'lodash';
-import { switchMap, shareReplay } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-traits',
@@ -59,7 +58,7 @@ export class TraitsComponent implements OnInit {
   unlockCount: number; // Number of traits learned on the item
 
   ngOnInit(): void {
-    this.fetchSelectedTraitData(this.selectedItem);
+    this.fetchSelectedTraitData();
   }
 
   //* Nav buttons helpers and setters ***********************************************************
@@ -191,7 +190,7 @@ export class TraitsComponent implements OnInit {
 
     // Handle trait changes
     this.setShownTraits();
-    this.fetchSelectedTraitData(this.selectedItem);
+    this.fetchSelectedTraitData();
   }
 
   /**
@@ -201,7 +200,7 @@ export class TraitsComponent implements OnInit {
   nextOrPrevItem(direction: 'next' | 'prev'): void {
     this.handleLoopingInItem(direction);
     this.setSelectedItemByIndex();
-    this.fetchSelectedTraitData(this.selectedItem);
+    this.fetchSelectedTraitData();
   }
 
   //* Trait buttons fetch and update ***********************************************************
@@ -216,21 +215,17 @@ export class TraitsComponent implements OnInit {
   };
 
   // Function to fetch the selected trait data (for ngOnInit and when user selects a new item)
-  fetchSelectedTraitData(item: string): void {
+  fetchSelectedTraitData(): void {
     this.traitsService
-      .getAllTraits(item)
+      .getAllTraits(this.selectedItem)
       .pipe(switchMap((res) => this.processApiResponse(res)))
       .subscribe();
   }
 
   // Update a single trait.
-  updateAndSetSingleTraitData(
-    item: string,
-    trait: string,
-    value: boolean
-  ): void {
+  updateAndSetSingleTraitData(trait: string, value: boolean): void {
     this.traitsService
-      .updateOneTrait(item, trait, value)
+      .updateOneTrait(this.selectedItem, trait, value)
       .pipe(switchMap((res) => this.processApiResponse(res)))
       .subscribe();
   }
@@ -249,7 +244,7 @@ export class TraitsComponent implements OnInit {
     if (btn === 'all') {
       this.updateAndSetMultipleTraitData(value);
     } else {
-      this.updateAndSetSingleTraitData(this.selectedItem, trait, value);
+      this.updateAndSetSingleTraitData(trait, value);
     }
   }
 }

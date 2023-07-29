@@ -32,11 +32,7 @@
   <div class="p-1 my-1 col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
     <div class="row">
       <div class="d-flex">
-        <button
-          class="btn btn-primary"
-          (click)="nextOrPrevStyle('prev')"
-          [disabled]="!hasSelectedStyle"
-        >
+        <button class="btn btn-primary" (click)="nextOrPrevStyle('prev')">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -54,11 +50,7 @@
         <div class="setWidthB d-flex align-items-center justify-content-center">
           <strong>{{ selectedStyle }}</strong>
         </div>
-        <button
-          class="btn btn-primary"
-          (click)="nextOrPrevStyle('next')"
-          [disabled]="!hasSelectedStyle"
-        >
+        <button class="btn btn-primary" (click)="nextOrPrevStyle('next')">
           Next
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -85,8 +77,7 @@
         [positive]="'Known'"
         [negative]="'Unknown'"
         [setOption]="hasAllUnlocks"
-        [disabled]="!hasSelectedStyle"
-        (optionSelected)="handleToggleAll($event)"
+        (optionSelected)="handleToggleButtons($event, 'all')"
       ></unlock-button>
 
       <ng-container *ngFor="let unlock of unlocksForButtons">
@@ -95,8 +86,7 @@
           [setOption]="unlock[1]"
           [positive]="'Known'"
           [negative]="'Unknown'"
-          [disabled]="!hasSelectedStyle"
-          (optionSelected)="handleToggleUnlock($event)"
+          (optionSelected)="handleToggleButtons($event, 'one')"
         ></unlock-button>
       </ng-container>
     </div>
